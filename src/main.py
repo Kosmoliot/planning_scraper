@@ -44,7 +44,7 @@ def main():
     all_applications = []
 
     try:
-        driver.get("https://planning.cornwall.gov.uk/online-applications/")
+        driver.get("https://info.southnorfolkandbroadland.gov.uk/online-applications/")
         search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
         search_input.send_keys(search_keyword)
         search_input.send_keys(Keys.RETURN)
