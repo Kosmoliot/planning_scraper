@@ -36,46 +36,61 @@ def extract_results(driver, keyword):
             print(f"Skipping a result due to error: {e}")
     return applications
 
+def scrape_site(driver, wait, site_url, keyword):
+    driver.get(site_url)
+    search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
+    search_input.clear()
+    search_input.send_keys(keyword)
+    search_input.send_keys(Keys.RETURN)
+
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+    time.sleep(1)
+
+    all_applications = []
+
+    while True:
+        print(f"Extracting results for '{keyword}' on {site_url}...")
+        all_applications.extend(extract_results(driver, keyword))
+
+        try:
+            next_button = driver.find_element(By.CSS_SELECTOR, "p.pager.top a.next")
+            next_url = next_button.get_attribute("href")
+            driver.get(next_url)
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+            time.sleep(1)
+        except:
+            print("No more pages.")
+            break
+
+    return all_applications
+
 def main():
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
     wait = WebDriverWait(driver, 10)
-    search_keyword = "concrete tank"
-    all_applications = []
+
+    # Multiple websites and search terms
+    urls = [
+        # "https://info.southnorfolkandbroadland.gov.uk/online-applications/",
+        # "https://planning.cornwall.gov.uk/online-applications/",
+        # "https://online.west-norfolk.gov.uk/",
+        "https://planning.norwich.gov.uk/online-applications/",
+        "https://planningon-line.rushcliffe.gov.uk/online-applications/"
+    ]
+    keywords = ["concrete tank", "anaerobic"]  # Add more keywords here
+
+    all_data = []
 
     try:
-        driver.get("https://info.southnorfolkandbroadland.gov.uk/online-applications/")
-        search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
-        search_input.send_keys(search_keyword)
-        search_input.send_keys(Keys.RETURN)
+        for site_url in urls:
+            for keyword in keywords:
+                data = scrape_site(driver, wait, site_url, keyword)
+                all_data.extend(data)
 
-        # Wait for the results to load
-        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
-        time.sleep(1)
-
-        while True:
-            print("Extracting current page...")
-            all_applications.extend(extract_results(driver, search_keyword))
-
-            # Check for "next" button
-            try:
-                next_button = driver.find_element(By.CSS_SELECTOR, "p.pager.top a.next")
-                next_url = next_button.get_attribute("href")
-                print("Navigating to next page...")
-                driver.get(next_url)
-
-                # Wait for new results to load
-                wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
-                time.sleep(1)
-            except:
-                print("No more pages.")
-                break
-
-        # Save to CSV
-        if all_applications:
-            df = pd.DataFrame(all_applications)
-            df.to_csv("cornwall_planning_applications.csv", index=False, encoding="utf-8")
-            print(f"Saved {len(all_applications)} results to 'cornwall_planning_applications.csv'")
+        if all_data:
+            df = pd.DataFrame(all_data)
+            df.to_csv("multi_site_planning_results.csv", index=False, encoding="utf-8")
+            print(f"Saved {len(all_data)} results to 'multi_site_planning_results.csv'")
         else:
             print("No results found.")
 
