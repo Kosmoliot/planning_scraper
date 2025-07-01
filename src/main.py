@@ -1,101 +1,58 @@
-import time
-import re
-import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+#     main()
+import streamlit as st
+import json
+import os
+from scraper import scrape_all_sites
 
-def extract_results(driver, keyword):
-    """Extracts application results from current page."""
-    results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
-    applications = []
+# Path to inputs file
+INPUT_FILE = "scrape_inputs.json"
 
-    for res in results:
-        try:
-            summary = res.find_element(By.CSS_SELECTOR, "div.summaryLinkTextClamp").text.strip()
-            meta_info = res.find_element(By.CSS_SELECTOR, "p.metaInfo").text.strip()
-            address = res.find_element(By.CSS_SELECTOR, "p.address").text.strip()
+# Load previous inputs if available
+def load_inputs():
+    if os.path.exists(INPUT_FILE):
+        with open(INPUT_FILE, "r") as f:
+            data = json.load(f)
+            return data.get("urls", []), data.get("keywords", [])
+    return [], []
 
-            ref_no = re.search(r"Ref\. No:\s*(\S+)", meta_info)
-            validated = re.search(r"Validated:\s*([^|]+)", meta_info)
-            status = re.search(r"Status:\s*(.+)", meta_info)
+# Save current inputs
+def save_inputs(urls, keywords):
+    with open(INPUT_FILE, "w") as f:
+        json.dump({"urls": urls, "keywords": keywords}, f, indent=2)
 
-            applications.append({
-                "Search Word": keyword,
-                "Reference No": ref_no.group(1) if ref_no else "",
-                "Validated Date": validated.group(1).strip() if validated else "",
-                "Status": status.group(1).strip() if status else "",
-                "Address": address,
-                "Summary": summary
-            })
-        except Exception as e:
-            print(f"Skipping a result due to error: {e}")
-    return applications
+# Load previous or set default values
+previous_urls, previous_keywords = load_inputs()
 
-def scrape_site(driver, wait, site_url, keyword):
-    driver.get(site_url)
-    search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
-    search_input.clear()
-    search_input.send_keys(keyword)
-    search_input.send_keys(Keys.RETURN)
+default_urls = "\n".join(previous_urls) if previous_urls else "\n".join([
+    "https://planning.norwich.gov.uk/online-applications/",
+    "https://planningon-line.rushcliffe.gov.uk/online-applications/"
+])
+default_keywords = "\n".join(previous_keywords) if previous_keywords else "concrete tank\nanaerobic"
 
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
-    time.sleep(1)
+# Streamlit UI
+st.set_page_config(page_title="Planning Scraper", layout="wide")
+st.title("Multi-site Planning Scraper")
 
-    all_applications = []
+urls_input = st.text_area("Planning portal URLs (one per line):", default_urls, height=150)
+keywords_input = st.text_area("Search keywords (one per line):", default_keywords, height=100)
 
-    while True:
-        print(f"Extracting results for '{keyword}' on {site_url}...")
-        all_applications.extend(extract_results(driver, keyword))
+if st.button("Scrape"):
+    urls = [url.strip() for url in urls_input.strip().splitlines() if url.strip()]
+    keywords = [kw.strip() for kw in keywords_input.strip().splitlines() if kw.strip()]
 
-        try:
-            next_button = driver.find_element(By.CSS_SELECTOR, "p.pager.top a.next")
-            next_url = next_button.get_attribute("href")
-            driver.get(next_url)
-            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
-            time.sleep(1)
-        except:
-            print("No more pages.")
-            break
-
-    return all_applications
-
-def main():
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    wait = WebDriverWait(driver, 10)
-
-    # Multiple websites and search terms
-    urls = [
-        # "https://info.southnorfolkandbroadland.gov.uk/online-applications/",
-        # "https://planning.cornwall.gov.uk/online-applications/",
-        # "https://online.west-norfolk.gov.uk/",
-        "https://planning.norwich.gov.uk/online-applications/",
-        "https://planningon-line.rushcliffe.gov.uk/online-applications/"
-    ]
-    keywords = ["concrete tank", "anaerobic"]  # Add more keywords here
-
-    all_data = []
-
-    try:
-        for site_url in urls:
-            for keyword in keywords:
-                data = scrape_site(driver, wait, site_url, keyword)
-                all_data.extend(data)
-
-        if all_data:
-            df = pd.DataFrame(all_data)
-            df.to_csv("multi_site_planning_results.csv", index=False, encoding="utf-8")
-            print(f"Saved {len(all_data)} results to 'multi_site_planning_results.csv'")
-        else:
-            print("No results found.")
-
-    finally:
-        driver.quit()
-
-if __name__ == "__main__":
-    main()
+    if not urls or not keywords:
+        st.warning("Please provide both URLs and keywords.")
+    else:
+        with st.spinner("Scraping... please wait."):
+            try:
+                df = scrape_all_sites(urls, keywords)
+                save_inputs(urls, keywords)  # Save inputs after successful scrape
+                if not df.empty:
+                    st.success(f"Scraped {len(df)} results from {len(urls)} sites.")
+                    st.dataframe(df)
+                    csv = df.to_csv(index=False).encode("utf-8")
+                    st.download_button("Download CSV", csv, "planning_results.csv", "text/csv")
+                else:
+                    st.info("No results found.")
+            except Exception as e:
+                st.error(f"Error: {e}")

@@ -1,0 +1,350 @@
+2025-06-30 12:20:14 [INFO] ====== WebDriver manager ======
+2025-06-30 12:20:14 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:20:14 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:20:15 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 12:20:16 [INFO] Scraping keyword 'concrete tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 12:20:20 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 12:20:21 [INFO] No results for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 12:20:21 [INFO] Unexpected error while waiting: 
+2025-06-30 12:20:23 [INFO] Scraping keyword 'concrete tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 12:21:15 [INFO] Scraping keyword 'anaerobic' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 12:25:30 [INFO] ====== WebDriver manager ======
+2025-06-30 12:25:30 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:25:30 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:25:31 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 12:25:32 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 12:27:35 [INFO] Skipping 'water tank' on https://planning.cornwall.gov.uk/online-applications/ due to timeout.
+2025-06-30 12:32:12 [INFO] ====== WebDriver manager ======
+2025-06-30 12:32:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:32:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 12:32:13 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 12:32:14 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 12:32:23 [INFO] Set results per page to 100.
+2025-06-30 12:33:54 [INFO] Skipping 'water tank' on https://planning.cornwall.gov.uk/online-applications/ due to timeout.
+2025-06-30 13:35:59 [INFO] ====== WebDriver manager ======
+2025-06-30 13:36:02 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:36:02 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:36:03 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 13:36:04 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:36:20 [INFO] Set results per page to 100.
+2025-06-30 13:38:16 [INFO] Skipping 'water tank' on https://planning.cornwall.gov.uk/online-applications/ due to timeout.
+2025-06-30 13:42:04 [INFO] ====== WebDriver manager ======
+2025-06-30 13:42:04 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:42:04 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:42:04 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 13:42:06 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:42:19 [INFO] Set results per page to 100.
+2025-06-30 13:42:20 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:42:59 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:43:08 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:43:17 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:25 [INFO] Extracting page 5 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:32 [INFO] Extracting page 6 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:38 [INFO] Extracting page 7 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:44 [INFO] Extracting page 8 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:50 [INFO] Extracting page 9 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:44:56 [INFO] Extracting page 10 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:04 [INFO] Extracting page 11 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:12 [INFO] Extracting page 12 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:18 [INFO] Extracting page 13 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:24 [INFO] Extracting page 14 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:30 [INFO] Extracting page 15 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:39 [INFO] Extracting page 16 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:47 [INFO] Extracting page 17 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:45:58 [ERROR] Error during pagination.
+Traceback (most recent call last):
+  File "/Users/miguel/Desktop/Coding/planning_scraper/src/scraper.py", line 144, in scrape_all_sites
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/miguel/Desktop/Coding/planning_scraper/.venv/lib/python3.13/site-packages/selenium/webdriver/support/wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+0   chromedriver                        0x0000000102889d14 cxxbridge1$str$ptr + 2735276
+1   chromedriver                        0x0000000102881f88 cxxbridge1$str$ptr + 2703136
+2   chromedriver                        0x00000001023d26f0 cxxbridge1$string$len + 90424
+3   chromedriver                        0x00000001024199e0 cxxbridge1$string$len + 381992
+4   chromedriver                        0x000000010245b0c8 cxxbridge1$string$len + 650000
+5   chromedriver                        0x000000010240dbe8 cxxbridge1$string$len + 333360
+6   chromedriver                        0x000000010284d598 cxxbridge1$str$ptr + 2487600
+7   chromedriver                        0x0000000102850830 cxxbridge1$str$ptr + 2500552
+8   chromedriver                        0x000000010282dc14 cxxbridge1$str$ptr + 2358188
+9   chromedriver                        0x00000001028510b8 cxxbridge1$str$ptr + 2502736
+10  chromedriver                        0x000000010281edec cxxbridge1$str$ptr + 2297220
+11  chromedriver                        0x0000000102871420 cxxbridge1$str$ptr + 2634680
+12  chromedriver                        0x00000001028715ac cxxbridge1$str$ptr + 2635076
+13  chromedriver                        0x0000000102881bd4 cxxbridge1$str$ptr + 2702188
+14  libsystem_pthread.dylib             0x0000000184ad2f94 _pthread_start + 136
+15  libsystem_pthread.dylib             0x0000000184acdd34 thread_start + 8
+
+2025-06-30 13:50:59 [INFO] ====== WebDriver manager ======
+2025-06-30 13:50:59 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:50:59 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:50:59 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 13:51:01 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:51:15 [INFO] Set results per page to 100.
+2025-06-30 13:51:17 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:51:23 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:51:29 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:51:30 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:55:16 [INFO] ====== WebDriver manager ======
+2025-06-30 13:55:17 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:55:17 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:55:17 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 13:55:18 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:55:26 [INFO] Set results per page to 100.
+2025-06-30 13:55:33 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:55:40 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:55:50 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:55:58 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:55:58 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:56:55 [INFO] ====== WebDriver manager ======
+2025-06-30 13:56:55 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:56:55 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 13:56:56 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 13:56:57 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:57:23 [INFO] Set results per page to 100.
+2025-06-30 13:57:24 [INFO] Extracting page 1 for 'water tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:57:25 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:57:25 [INFO] Scraping keyword 'concrete tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:57:27 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 13:57:40 [INFO] Extracting page 1 for 'concrete tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:57:40 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:57:40 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:57:41 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 13:57:53 [INFO] Extracting page 1 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:58:04 [INFO] Extracting page 2 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:58:16 [INFO] Extracting page 3 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 13:58:16 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:58:16 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:58:36 [INFO] Set results per page to 100.
+2025-06-30 13:58:38 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:58:52 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:59:07 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:59:21 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:59:21 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:59:21 [INFO] Scraping keyword 'concrete tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:59:38 [INFO] Set results per page to 100.
+2025-06-30 13:59:45 [INFO] Extracting page 1 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 13:59:46 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 13:59:46 [INFO] Scraping keyword 'anaerobic' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:00:09 [INFO] Set results per page to 100.
+2025-06-30 14:00:10 [INFO] Extracting page 1 for 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:00:10 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:00:10 [INFO] Scraping keyword 'water tank' from https://online.west-norfolk.gov.uk/
+2025-06-30 14:00:21 [INFO] Skipping 'water tank' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-06-30 14:00:21 [INFO] Scraping keyword 'concrete tank' from https://online.west-norfolk.gov.uk/
+2025-06-30 14:00:31 [INFO] Skipping 'concrete tank' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-06-30 14:00:31 [INFO] Scraping keyword 'anaerobic' from https://online.west-norfolk.gov.uk/
+2025-06-30 14:00:41 [INFO] Skipping 'anaerobic' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-06-30 14:00:41 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:42 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:00:45 [INFO] Extracting page 1 for 'water tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:46 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:00:46 [INFO] Scraping keyword 'concrete tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:46 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:00:49 [INFO] Extracting page 1 for 'concrete tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:49 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:00:49 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:49 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:00:51 [INFO] No results for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:51 [INFO] Unexpected error while waiting: 
+2025-06-30 14:00:52 [INFO] Extracting page 1 for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:00:52 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:00:52 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:00:54 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:01:02 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:02 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:01:02 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:03 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:01:05 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:05 [INFO] Unexpected error while waiting: 
+2025-06-30 14:01:06 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:06 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:01:06 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:08 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:01:15 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:01:15 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:02:13 [INFO] ====== WebDriver manager ======
+2025-06-30 14:02:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 14:02:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 14:02:13 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 14:02:15 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:22 [INFO] Set results per page to 100.
+2025-06-30 14:02:25 [INFO] Extracting page 1 for 'water tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:27 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:02:27 [INFO] Scraping keyword 'concrete tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:29 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:02:40 [INFO] Extracting page 1 for 'concrete tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:40 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:02:40 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:41 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:02:45 [INFO] Extracting page 1 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:50 [INFO] Extracting page 2 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:55 [INFO] Extracting page 3 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:02:55 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:02:55 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:02:58 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:03:05 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:13 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:18 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:24 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:31 [INFO] Extracting page 5 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:40 [INFO] Extracting page 6 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:48 [INFO] Extracting page 7 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:03:54 [INFO] Extracting page 8 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:00 [INFO] Extracting page 9 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:06 [INFO] Extracting page 10 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:13 [INFO] Extracting page 11 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:19 [INFO] Extracting page 12 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:25 [INFO] Extracting page 13 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:35 [ERROR] Error during pagination.
+Traceback (most recent call last):
+  File "/Users/miguel/Desktop/Coding/planning_scraper/src/scraper.py", line 146, in scrape_all_sites
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/miguel/Desktop/Coding/planning_scraper/.venv/lib/python3.13/site-packages/selenium/webdriver/support/wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+0   chromedriver                        0x00000001025d1d14 cxxbridge1$str$ptr + 2735276
+1   chromedriver                        0x00000001025c9f88 cxxbridge1$str$ptr + 2703136
+2   chromedriver                        0x000000010211a6f0 cxxbridge1$string$len + 90424
+3   chromedriver                        0x00000001021619e0 cxxbridge1$string$len + 381992
+4   chromedriver                        0x00000001021a30c8 cxxbridge1$string$len + 650000
+5   chromedriver                        0x0000000102155be8 cxxbridge1$string$len + 333360
+6   chromedriver                        0x0000000102595598 cxxbridge1$str$ptr + 2487600
+7   chromedriver                        0x0000000102598830 cxxbridge1$str$ptr + 2500552
+8   chromedriver                        0x0000000102575c14 cxxbridge1$str$ptr + 2358188
+9   chromedriver                        0x00000001025990b8 cxxbridge1$str$ptr + 2502736
+10  chromedriver                        0x0000000102566dec cxxbridge1$str$ptr + 2297220
+11  chromedriver                        0x00000001025b9420 cxxbridge1$str$ptr + 2634680
+12  chromedriver                        0x00000001025b95ac cxxbridge1$str$ptr + 2635076
+13  chromedriver                        0x00000001025c9bd4 cxxbridge1$str$ptr + 2702188
+14  libsystem_pthread.dylib             0x0000000184ad2f94 _pthread_start + 136
+15  libsystem_pthread.dylib             0x0000000184acdd34 thread_start + 8
+
+2025-06-30 14:04:35 [INFO] Scraping keyword 'concrete tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:46 [INFO] Skipping 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/ due to timeout.
+2025-06-30 14:04:46 [INFO] Scraping keyword 'anaerobic' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:04:56 [INFO] Skipping 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/ due to timeout.
+2025-06-30 14:04:56 [INFO] Scraping keyword 'water tank' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:04:59 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:05:07 [INFO] Extracting page 1 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:15 [INFO] Extracting page 2 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:19 [INFO] Extracting page 3 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:24 [INFO] Extracting page 4 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:28 [INFO] Extracting page 5 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:29 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:05:29 [INFO] Scraping keyword 'concrete tank' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:31 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:05:40 [INFO] Extracting page 1 for 'concrete tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:40 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:05:40 [INFO] Scraping keyword 'anaerobic' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:42 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:05:50 [INFO] Extracting page 1 for 'anaerobic' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:05:58 [INFO] Extracting page 2 for 'anaerobic' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:06:03 [INFO] Extracting page 3 for 'anaerobic' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:06:08 [INFO] Extracting page 4 for 'anaerobic' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:06:08 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:08 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:09 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:12 [INFO] Extracting page 1 for 'water tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:12 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:12 [INFO] Scraping keyword 'concrete tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:13 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:18 [INFO] Extracting page 1 for 'concrete tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:18 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:18 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:19 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:20 [INFO] No results for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:20 [INFO] Unexpected error while waiting: 
+2025-06-30 14:06:22 [INFO] Extracting page 1 for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:06:22 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:22 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:24 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:32 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:32 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:32 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:33 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:35 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:35 [INFO] Unexpected error while waiting: 
+2025-06-30 14:06:36 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:36 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:06:36 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:37 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:06:44 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:06:44 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:17:43 [INFO] ====== WebDriver manager ======
+2025-06-30 14:17:44 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 14:17:44 [INFO] Get LATEST chromedriver version for google-chrome
+2025-06-30 14:17:44 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-06-30 14:17:45 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:17:53 [INFO] Set results per page to 100.
+2025-06-30 14:17:56 [INFO] Extracting page 1 for 'water tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:17:57 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:17:57 [INFO] Scraping keyword 'concrete tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:12 [INFO] Set results per page to 100.
+2025-06-30 14:18:21 [INFO] Extracting page 1 for 'concrete tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:21 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:18:21 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:23 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:18:28 [INFO] Extracting page 1 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:33 [INFO] Extracting page 2 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:38 [INFO] Extracting page 3 for 'anaerobic' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-06-30 14:18:38 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:18:38 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:19:20 [INFO] Set results per page to 100.
+2025-06-30 14:19:21 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:19:32 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:19:40 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:19:48 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:19:48 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:19:48 [INFO] Scraping keyword 'concrete tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:20:00 [INFO] Set results per page to 100.
+2025-06-30 14:20:13 [INFO] Extracting page 1 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:20:14 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:20:14 [INFO] Scraping keyword 'anaerobic' from https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:20:26 [INFO] Set results per page to 100.
+2025-06-30 14:20:32 [INFO] Extracting page 1 for 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/
+2025-06-30 14:20:32 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:20:32 [INFO] Scraping keyword 'water tank' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:20:43 [INFO] Set results per page to 100.
+2025-06-30 14:20:45 [INFO] Extracting page 1 for 'water tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:20:46 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:20:46 [INFO] Scraping keyword 'concrete tank' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:20:58 [INFO] Set results per page to 100.
+2025-06-30 14:20:59 [INFO] Extracting page 1 for 'concrete tank' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:20:59 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:20:59 [INFO] Scraping keyword 'anaerobic' from https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:21:07 [INFO] Set results per page to 100.
+2025-06-30 14:21:09 [INFO] Extracting page 1 for 'anaerobic' on https://online.west-norfolk.gov.uk/online-applications/
+2025-06-30 14:21:09 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:09 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:15 [INFO] Set results per page to 100.
+2025-06-30 14:21:17 [INFO] Extracting page 1 for 'water tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:17 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:17 [INFO] Scraping keyword 'concrete tank' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:22 [INFO] Set results per page to 100.
+2025-06-30 14:21:24 [INFO] Extracting page 1 for 'concrete tank' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:24 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:24 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:26 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:21:26 [INFO] No results for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:26 [INFO] Unexpected error while waiting: 
+2025-06-30 14:21:28 [INFO] Extracting page 1 for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-06-30 14:21:28 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:28 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:41 [INFO] Set results per page to 100.
+2025-06-30 14:21:43 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:43 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:43 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:46 [WARNING] Could not find resultsPerPage dropdown.
+2025-06-30 14:21:46 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:46 [INFO] Unexpected error while waiting: 
+2025-06-30 14:21:47 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:47 [INFO] No 'Next' button found. Reached last page.
+2025-06-30 14:21:47 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:21:56 [INFO] Set results per page to 100.
+2025-06-30 14:22:00 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-06-30 14:22:00 [INFO] No 'Next' button found. Reached last page.
