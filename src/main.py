@@ -1,58 +1,48 @@
-#     main()
+#   main.py
+
 import streamlit as st
-import json
-import os
 from scraper import scrape_all_sites
+from db import insert_new_rows
+import json
+from pathlib import Path
 
-# Path to inputs file
-INPUT_FILE = "scrape_inputs.json"
+INPUT_FILE = Path("saved_inputs.json")
 
-# Load previous inputs if available
 def load_inputs():
-    if os.path.exists(INPUT_FILE):
-        with open(INPUT_FILE, "r") as f:
-            data = json.load(f)
-            return data.get("urls", []), data.get("keywords", [])
-    return [], []
+    if INPUT_FILE.exists():
+        try:
+            data = json.loads(INPUT_FILE.read_text(encoding="utf-8"))
+            return data.get("urls", ""), data.get("keywords", "")
+        except:
+            pass
+    return ("https://planning.norwich.gov.uk/online-applications/\n"
+            "https://planningon-line.rushcliffe.gov.uk/online-applications/",
+            "concrete tank\nanaerobic")
 
-# Save current inputs
-def save_inputs(urls, keywords):
-    with open(INPUT_FILE, "w") as f:
-        json.dump({"urls": urls, "keywords": keywords}, f, indent=2)
+def save_inputs(u, k):
+    INPUT_FILE.write_text(json.dumps({"urls": u, "keywords": k}, indent=2), encoding="utf-8")
 
-# Load previous or set default values
-previous_urls, previous_keywords = load_inputs()
-
-default_urls = "\n".join(previous_urls) if previous_urls else "\n".join([
-    "https://planning.norwich.gov.uk/online-applications/",
-    "https://planningon-line.rushcliffe.gov.uk/online-applications/"
-])
-default_keywords = "\n".join(previous_keywords) if previous_keywords else "concrete tank\nanaerobic"
-
-# Streamlit UI
 st.set_page_config(page_title="Planning Scraper", layout="wide")
 st.title("Multi-site Planning Scraper")
 
-urls_input = st.text_area("Planning portal URLs (one per line):", default_urls, height=150)
-keywords_input = st.text_area("Search keywords (one per line):", default_keywords, height=100)
+urls_text, keywords_text = load_inputs()
+urls_input = st.text_area("Portal URLs (one per line):", urls_text, height=150)
+keywords_input = st.text_area("Search keywords (one per line):", keywords_text, height=100)
 
 if st.button("Scrape"):
-    urls = [url.strip() for url in urls_input.strip().splitlines() if url.strip()]
-    keywords = [kw.strip() for kw in keywords_input.strip().splitlines() if kw.strip()]
+    list_urls = [u.strip() for u in urls_input.splitlines() if u.strip()]
+    list_keywords = [k.strip() for k in keywords_input.splitlines() if k.strip()]
 
-    if not urls or not keywords:
-        st.warning("Please provide both URLs and keywords.")
+    if not list_urls or not list_keywords:
+        st.warning("Please add both URLs and keywords.")
     else:
-        with st.spinner("Scraping... please wait."):
-            try:
-                df = scrape_all_sites(urls, keywords)
-                save_inputs(urls, keywords)  # Save inputs after successful scrape
-                if not df.empty:
-                    st.success(f"Scraped {len(df)} results from {len(urls)} sites.")
-                    st.dataframe(df)
-                    csv = df.to_csv(index=False).encode("utf-8")
-                    st.download_button("Download CSV", csv, "planning_results.csv", "text/csv")
-                else:
-                    st.info("No results found.")
-            except Exception as e:
-                st.error(f"Error: {e}")
+        save_inputs(urls_input, keywords_input)
+        with st.spinner("Scraping..."):
+            df = scrape_all_sites(list_urls, list_keywords)
+            if not df.empty:
+                insert_new_rows(df)
+                st.success(f"Scraped {len(df)} entries.")
+                st.dataframe(df)
+                st.download_button("Download CSV", df.to_csv(index=False), "results.csv", "text/csv")
+            else:
+                st.info("No results found.")
