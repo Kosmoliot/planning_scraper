@@ -1,0 +1,31 @@
+{
+    "project": {
+      "name": "planning-scraper"
+    },
+    "services": [
+      {
+        "name": "web",
+        "connect": [],
+        "buildCommand": "",
+        "startCommand": "streamlit run src/main.py",
+        "envVars": [
+          {
+            "key": "DATABASE_URL",
+            "value": "postgresql://postgres:fdOwFgDWUzvqNQKWzxDzKpksWGskWBeu@shinkansen.proxy.rlwy.net:58860/railway"
+          }
+        ]
+      },
+      {
+        "name": "scheduler",
+        "command": "python src/scheduled_scraper.py",
+        "schedule": "@daily",
+        "envVars": [
+          {
+            "key": "DATABASE_URL",
+            "value": "postgresql://postgres:fdOwFgDWUzvqNQKWzxDzKpksWGskWBeu@shinkansen.proxy.rlwy.net:58860/railway"
+          }
+        ]
+      }
+    ]
+  }
+  
