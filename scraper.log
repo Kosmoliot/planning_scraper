@@ -348,3 +348,151 @@ Stacktrace:
 2025-06-30 14:21:56 [INFO] Set results per page to 100.
 2025-06-30 14:22:00 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
 2025-06-30 14:22:00 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:13:48 [INFO] ====== WebDriver manager ======
+2025-07-02 22:13:48 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:13:48 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:13:48 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:13:50 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:13:55 [INFO] Set results per page to 100.
+2025-07-02 22:13:58 [INFO] Extracting page 1 for 'water tank' on https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:13:58 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:13:58 [INFO] Scraping keyword 'concrete tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:14:01 [INFO] Set results per page to 100.
+2025-07-02 22:14:03 [INFO] Extracting page 1 for 'concrete tank' on https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:14:03 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:14:03 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:14:05 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:14:05 [INFO] No results for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:14:05 [INFO] Unexpected error while waiting: 
+2025-07-02 22:14:07 [INFO] Extracting page 1 for 'anaerobic' on https://planning.norwich.gov.uk/online-applications/
+2025-07-02 22:14:07 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:14:07 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:17 [INFO] Set results per page to 100.
+2025-07-02 22:14:21 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:22 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:14:22 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:25 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:14:25 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:25 [INFO] Unexpected error while waiting: 
+2025-07-02 22:14:26 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:26 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:14:26 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:33 [INFO] Set results per page to 100.
+2025-07-02 22:14:35 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:14:35 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:16:08 [INFO] ====== WebDriver manager ======
+2025-07-02 22:16:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:16:09 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:16:09 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:16:10 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:20 [INFO] Set results per page to 100.
+2025-07-02 22:16:25 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:25 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:16:25 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:26 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:16:28 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:28 [INFO] Unexpected error while waiting: 
+2025-07-02 22:16:29 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:29 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:16:29 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:30 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:16:35 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:16:35 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:18:58 [INFO] ====== WebDriver manager ======
+2025-07-02 22:18:58 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:18:58 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:18:58 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:19:00 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:19 [INFO] Set results per page to 100.
+2025-07-02 22:19:20 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:21 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:19:21 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:27 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:19:27 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:27 [INFO] Unexpected error while waiting: 
+2025-07-02 22:19:28 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:28 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:19:28 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:39 [INFO] Set results per page to 100.
+2025-07-02 22:19:41 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:19:41 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:22:22 [INFO] ====== WebDriver manager ======
+2025-07-02 22:22:22 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:22:23 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:22:23 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:22:24 [INFO] Scraping keyword 'water tank' from https://online.west-norfolk.gov.uk/
+2025-07-02 22:22:36 [INFO] Skipping 'water tank' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-07-02 22:22:36 [INFO] Scraping keyword 'concrete tank' from https://online.west-norfolk.gov.uk/
+2025-07-02 22:22:46 [INFO] Skipping 'concrete tank' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-07-02 22:22:46 [INFO] Scraping keyword 'anaerobic' from https://online.west-norfolk.gov.uk/
+2025-07-02 22:22:53 [INFO] ====== WebDriver manager ======
+2025-07-02 22:22:53 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:22:53 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:22:53 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:22:54 [INFO] Scraping keyword 'water tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:22:56 [INFO] Skipping 'anaerobic' on https://online.west-norfolk.gov.uk/ due to timeout.
+2025-07-02 22:23:11 [INFO] Set results per page to 100.
+2025-07-02 22:23:15 [INFO] Extracting page 1 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:23:29 [INFO] Extracting page 2 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:23:48 [INFO] Extracting page 3 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:23:59 [INFO] Extracting page 4 for 'water tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:23:59 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:23:59 [INFO] Scraping keyword 'concrete tank' from https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:24:01 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:24:59 [INFO] Extracting page 1 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:08 [INFO] Extracting page 2 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:13 [INFO] Extracting page 3 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:21 [INFO] Extracting page 4 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:26 [INFO] Extracting page 5 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:33 [INFO] Extracting page 6 for 'concrete tank' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:33 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:25:33 [INFO] Scraping keyword 'anaerobic' from https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:37 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:25:48 [INFO] Extracting page 1 for 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:25:56 [INFO] Extracting page 2 for 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:26:02 [INFO] Extracting page 3 for 'anaerobic' on https://planning.cornwall.gov.uk/online-applications/
+2025-07-02 22:26:02 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:34:46 [INFO] ====== WebDriver manager ======
+2025-07-02 22:34:46 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:34:46 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:34:46 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:34:48 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:34:58 [INFO] Set results per page to 100.
+2025-07-02 22:35:06 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:06 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:35:06 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:10 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:35:10 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:10 [INFO] Unexpected error while waiting: 
+2025-07-02 22:35:12 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:12 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:35:12 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:18 [INFO] Set results per page to 100.
+2025-07-02 22:35:19 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:35:19 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:45:42 [INFO] ====== WebDriver manager ======
+2025-07-02 22:45:43 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:45:43 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:45:43 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:45:45 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:45:54 [INFO] Set results per page to 100.
+2025-07-02 22:45:59 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:45:59 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:45:59 [INFO] Scraping keyword 'concrete tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:02 [WARNING] Could not find resultsPerPage dropdown.
+2025-07-02 22:46:02 [INFO] No results for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:02 [INFO] Unexpected error while waiting: 
+2025-07-02 22:46:03 [INFO] Extracting page 1 for 'concrete tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:03 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:46:03 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:12 [INFO] Set results per page to 100.
+2025-07-02 22:46:16 [INFO] Extracting page 1 for 'anaerobic' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:16 [INFO] No 'Next' button found. Reached last page.
+2025-07-02 22:46:25 [INFO] ====== WebDriver manager ======
+2025-07-02 22:46:25 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:46:25 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-02 22:46:25 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-02 22:46:27 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:34 [INFO] Set results per page to 100.
+2025-07-02 22:46:35 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-02 22:46:35 [INFO] No 'Next' button found. Reached last page.

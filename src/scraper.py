@@ -10,6 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -83,7 +84,6 @@ def scrape_all_sites(urls, keywords):
                     search_input.send_keys(Keys.RETURN)
                     # Set results per page to 100 if dropdown exists
                     try:
-                        from selenium.webdriver.support.ui import Select
                         select = Select(driver.find_element(By.ID, "resultsPerPage"))
                         select.select_by_value("100")
                         go_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"][value="Go"]')
