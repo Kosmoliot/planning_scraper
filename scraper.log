@@ -496,3 +496,126 @@ Stacktrace:
 2025-07-02 22:46:34 [INFO] Set results per page to 100.
 2025-07-02 22:46:35 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
 2025-07-02 22:46:35 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 10:40:19 [INFO] ====== WebDriver manager ======
+2025-07-04 10:40:23 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:40:23 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:40:23 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:40:23 [INFO] WebDriver version 137.0.7151.119 selected
+2025-07-04 10:40:23 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-04 10:40:23 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-04 10:40:24 [INFO] Driver downloading response is 200
+2025-07-04 10:40:24 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:40:24 [INFO] Driver has been saved in cache [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119]
+2025-07-04 10:40:26 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 10:40:41 [INFO] Set results per page to 100.
+2025-07-04 10:40:42 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 10:40:42 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 10:56:13 [INFO] ====== WebDriver manager ======
+2025-07-04 10:56:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:56:13 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 10:56:13 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 10:56:15 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 10:56:28 [INFO] Set results per page to 100.
+2025-07-04 10:56:29 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 10:56:29 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:04:01 [INFO] ====== WebDriver manager ======
+2025-07-04 11:04:01 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:04:01 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:04:01 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:04:03 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:16 [INFO] Set results per page to 100.
+2025-07-04 11:04:16 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:17 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:18 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:19 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:20 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:21 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:22 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:23 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:24 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:25 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:26 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:27 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:28 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:29 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:30 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:32 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:33 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:34 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:35 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:36 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:37 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:38 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:39 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:40 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:41 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:42 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:43 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:44 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:45 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:46 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:47 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:48 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:49 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:50 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:51 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:52 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:53 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:54 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:55 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:56 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:57 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:58 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:04:59 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:00 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:01 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:02 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:03 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:04 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:05 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:06 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:07 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:08 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:09 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:10 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:11 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:12 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:13 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:14 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:15 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:16 [INFO] ✅ Results loaded for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:17 [INFO] Still waiting for results after 60 seconds for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:19 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:05:19 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:12:07 [INFO] ====== WebDriver manager ======
+2025-07-04 11:12:07 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:12:07 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:12:07 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:12:09 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-04 11:12:23 [INFO] Set results per page to 100.
+2025-07-04 11:12:33 [INFO] Extracting page 1 for 'water tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-04 11:12:34 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:13:07 [INFO] ====== WebDriver manager ======
+2025-07-04 11:13:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:13:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:13:08 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:13:09 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-04 11:13:23 [INFO] Set results per page to 100.
+2025-07-04 11:13:26 [INFO] Extracting page 1 for 'water tank' on https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-04 11:13:28 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:22:20 [INFO] ====== WebDriver manager ======
+2025-07-04 11:22:21 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:22:21 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:22:21 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:22:22 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:22:36 [INFO] Set results per page to 100.
+2025-07-04 11:22:38 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:22:38 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:26:09 [INFO] ====== WebDriver manager ======
+2025-07-04 11:26:10 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:26:10 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:26:10 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:26:11 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:26:21 [INFO] Set results per page to 100.
+2025-07-04 11:26:25 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:26:25 [INFO] No 'Next' button found. Reached last page.

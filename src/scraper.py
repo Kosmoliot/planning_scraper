@@ -45,7 +45,13 @@ def extract_results(driver, keyword, site):
 
     for res in results:
         try:
-            summary = res.find_element(By.CSS_SELECTOR, "div.summaryLinkTextClamp").text.strip()
+            # Try to get summary from div (South Norfolk style)
+            try:
+                summary = res.find_element(By.CLASS_NAME, "summaryLinkTextClamp").text.strip()
+            except:
+                # Fallback for Rushcliffe-style: just an <a> tag
+                summary = res.find_element(By.TAG_NAME, "a").text.strip()
+
             meta_info = res.find_element(By.CSS_SELECTOR, "p.metaInfo").text.strip()
             address = res.find_element(By.CSS_SELECTOR, "p.address").text.strip()
 
@@ -64,6 +70,7 @@ def extract_results(driver, keyword, site):
             })
         except Exception:
             continue
+
     return applications
 
 
@@ -102,10 +109,11 @@ def scrape_all_sites(urls, keywords):
                     try:
                         while True:
                             try:
-                                if driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult"):
-                                    break
+                                results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
+                                if results:
+                                    break  # Success — results found
 
-                                # Check if "No results found." is present in messagebox
+                                # Only check message box if results are still not found
                                 message_boxes = driver.find_elements(By.CSS_SELECTOR, "div.messagebox")
                                 for box in message_boxes:
                                     list_items = box.find_elements(By.TAG_NAME, "li")
@@ -113,6 +121,7 @@ def scrape_all_sites(urls, keywords):
                                         if "no results found" in li.text.strip().lower():
                                             logging.info(f"No results for '{keyword}' on {site_url}")
                                             raise StopIteration
+
 
                                 time.sleep(poll_interval)
                                 elapsed += poll_interval
