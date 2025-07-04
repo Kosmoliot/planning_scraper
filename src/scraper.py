@@ -7,49 +7,41 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
+from store import store_results
 
-
-
-# Logging setup
 logging.basicConfig(
-    filename="scraper.log",
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
+    handlers=[
+        logging.FileHandler("scraper.log"),
+        logging.StreamHandler()  # logs to terminal
+    ]
 )
 
 def setup_driver():
-    chrome_options = Options()
-    # chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--window-size=1920x1080")
-    chrome_options.add_argument(
+    options = webdriver.ChromeOptions()
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920x1080")
+    options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     )
-    service = Service(ChromeDriverManager().install())
-    return webdriver.Chrome(service=service, options=chrome_options)
-
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 def extract_results(driver, keyword, site):
     results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
     applications = []
-
     for res in results:
         try:
-            # Try to get summary from div (South Norfolk style)
             try:
                 summary = res.find_element(By.CLASS_NAME, "summaryLinkTextClamp").text.strip()
             except:
-                # Fallback for Rushcliffe-style: just an <a> tag
                 summary = res.find_element(By.TAG_NAME, "a").text.strip()
 
             meta_info = res.find_element(By.CSS_SELECTOR, "p.metaInfo").text.strip()
@@ -70,9 +62,7 @@ def extract_results(driver, keyword, site):
             })
         except Exception:
             continue
-
     return applications
-
 
 def scrape_all_sites(urls, keywords):
     driver = setup_driver()
@@ -89,86 +79,58 @@ def scrape_all_sites(urls, keywords):
                     search_input.clear()
                     search_input.send_keys(keyword)
                     search_input.send_keys(Keys.RETURN)
-                    # Set results per page to 100 if dropdown exists
+
                     try:
                         select = Select(driver.find_element(By.ID, "resultsPerPage"))
                         select.select_by_value("100")
                         go_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"][value="Go"]')
                         go_button.click()
                         time.sleep(2)
-                        logging.info("Set results per page to 100.")
                     except NoSuchElementException:
-                        logging.warning("Could not find resultsPerPage dropdown.")
+                        pass
 
-
-                    # Wait for results or "no results found"
-                    max_wait = 60  # seconds
-                    poll_interval = 1
+                    max_wait = 60
                     elapsed = 0
+                    while True:
+                        try:
+                            results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
+                            if results:
+                                break
+                            boxes = driver.find_elements(By.CSS_SELECTOR, "div.messagebox")
+                            for box in boxes:
+                                for li in box.find_elements(By.TAG_NAME, "li"):
+                                    if "no results found" in li.text.strip().lower():
+                                        raise StopIteration
+                            time.sleep(1)
+                            elapsed += 1
+                            if elapsed >= max_wait:
+                                break
+                        except:
+                            break
+                except StopIteration:
+                    continue
+
+                time.sleep(random.uniform(1, 2))
+                page = 1
+                max_pages = 50
+
+                while True:
+                    page_data = extract_results(driver, keyword, site_url)
+                    all_data.extend(page_data)
+                    store_results(page_data)
 
                     try:
-                        while True:
-                            try:
-                                results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
-                                if results:
-                                    break  # Success — results found
-
-                                # Only check message box if results are still not found
-                                message_boxes = driver.find_elements(By.CSS_SELECTOR, "div.messagebox")
-                                for box in message_boxes:
-                                    list_items = box.find_elements(By.TAG_NAME, "li")
-                                    for li in list_items:
-                                        if "no results found" in li.text.strip().lower():
-                                            logging.info(f"No results for '{keyword}' on {site_url}")
-                                            raise StopIteration
-
-
-                                time.sleep(poll_interval)
-                                elapsed += poll_interval
-                                if elapsed >= max_wait:
-                                    logging.info(f"Still waiting for results after {max_wait} seconds for '{keyword}' on {site_url}")
-                                    break
-                            except Exception as e:
-                                logging.info(f"Unexpected error while waiting: {e}")
-                                break
-                    except StopIteration:
-                        continue  # Skip to next keyword
-
-                    time.sleep(random.uniform(1, 2))
-
-                    
-                    page_num = 1
-                    max_pages = 50  # fail-safe
-
-                    while True:
-                        logging.info(f"Extracting page {page_num} for '{keyword}' on {site_url}")
-                        all_data.extend(extract_results(driver, keyword, site_url))
-
-                        try:
-                            next_buttons = driver.find_elements(By.CSS_SELECTOR, "a.next")
-                            if not next_buttons:
-                                logging.info("No 'Next' button found. Reached last page.")
-                                break
-
-                            next_button = next_buttons[0]
-                            driver.execute_script("arguments[0].click();", next_button)
-                            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
-                            time.sleep(random.uniform(1, 2))
-                            page_num += 1
-
-                            if page_num > max_pages:
-                                logging.warning("Reached max page limit; stopping pagination to avoid infinite loop.")
-                                break
-
-                        except Exception as e:
-                            logging.exception("Error during pagination.")
+                        next_buttons = driver.find_elements(By.CSS_SELECTOR, "a.next")
+                        if not next_buttons:
                             break
-
-
-                except TimeoutException:
-                    logging.info(f"Skipping '{keyword}' on {site_url} due to timeout.")
-                except Exception as e:
-                    logging.info(f"Error scraping '{keyword}' on {site_url}: {e}")
+                        driver.execute_script("arguments[0].click();", next_buttons[0])
+                        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+                        time.sleep(random.uniform(1, 2))
+                        page += 1
+                        if page > max_pages:
+                            break
+                    except:
+                        break
     finally:
         driver.quit()
 
