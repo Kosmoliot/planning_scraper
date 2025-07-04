@@ -30,4 +30,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 WORKDIR /app
 
-CMD ["streamlit", "run", "src/main.py", "--server.port=8501", "--server.enableCORS=false"]
+CMD ["streamlit", "run", "src/main.py", "--server.port=8080", "--server.enableCORS=false"]
