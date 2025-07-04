@@ -1,8 +1,5 @@
-selenium 
-pandas 
-webdriver-manager
 streamlit
-requests
-beautifulsoup4
+selenium
 psycopg2-binary
-
+python-dotenv
+pandas
