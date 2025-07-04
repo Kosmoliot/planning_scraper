@@ -619,3 +619,39 @@ Stacktrace:
 2025-07-04 11:26:21 [INFO] Set results per page to 100.
 2025-07-04 11:26:25 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
 2025-07-04 11:26:25 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 11:47:07 [INFO] ====== WebDriver manager ======
+2025-07-04 11:47:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:47:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 11:47:08 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 11:47:09 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:47:18 [INFO] Set results per page to 100.
+2025-07-04 11:47:22 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 11:47:22 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 13:23:02 [INFO] ====== WebDriver manager ======
+2025-07-04 13:23:06 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:23:06 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:23:06 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 13:23:08 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 13:23:21 [INFO] Set results per page to 100.
+2025-07-04 13:23:23 [INFO] Extracting page 1 for 'water tank' on https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 13:23:23 [INFO] No 'Next' button found. Reached last page.
+2025-07-04 13:31:36 [INFO] ====== WebDriver manager ======
+2025-07-04 13:31:37 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:31:37 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:31:37 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 13:31:38 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 13:38:12 [INFO] ====== WebDriver manager ======
+2025-07-04 13:38:12 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:38:12 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:38:12 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 13:38:14 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 13:38:58 [INFO] ====== WebDriver manager ======
+2025-07-04 13:38:58 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:38:58 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:38:59 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 13:39:00 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-04 13:40:08 [INFO] ====== WebDriver manager ======
+2025-07-04 13:40:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:40:08 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-04 13:40:08 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
+2025-07-04 13:40:10 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
