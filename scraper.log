@@ -655,3 +655,17 @@ Stacktrace:
 2025-07-04 13:40:08 [INFO] Get LATEST chromedriver version for google-chrome
 2025-07-04 13:40:08 [INFO] Driver [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119/chromedriver-mac-arm64/chromedriver] found in cache
 2025-07-04 13:40:10 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-08 13:39:14,866 [INFO] ====== WebDriver manager ======
+2025-07-08 13:39:15,147 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-08 13:39:15,235 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-08 13:39:15,281 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-08 13:39:15,392 [INFO] WebDriver version 137.0.7151.119 selected
+2025-07-08 13:39:15,395 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-08 13:39:15,395 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-08 13:39:15,552 [INFO] Driver downloading response is 200
+2025-07-08 13:39:17,014 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-08 13:39:17,145 [INFO] Driver has been saved in cache [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119]
+2025-07-08 13:39:19,331 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-08 13:39:34,496 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-08 13:39:48,271 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-08 13:40:14,642 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
