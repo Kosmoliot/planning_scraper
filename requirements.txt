@@ -3,3 +3,4 @@ selenium
 psycopg2-binary
 python-dotenv
 pandas
+webdriver-manager
