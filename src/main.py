@@ -3,11 +3,14 @@ import json
 import os
 import datetime
 import pandas as pd
+import logging
 
 from scraper import scrape_all_sites
 from db import fetch_filtered_results
 
 INPUT_FILE = "scrape_inputs.json"
+
+logging.basicConfig(level=logging.INFO)
 
 def load_inputs():
     if os.path.exists(INPUT_FILE):
@@ -36,17 +39,17 @@ st.subheader("Filter by Validated Date")
 col1, col2 = st.columns(2)
 with col1:
     start_date = st.date_input(
-    "Start date",
-    datetime.date.today() - datetime.timedelta(days=30),
-    min_value=datetime.date(1985, 1, 1),
-    max_value=datetime.date.today()
+        "Start date",
+        datetime.date.today() - datetime.timedelta(days=30),
+        min_value=datetime.date(1985, 1, 1),
+        max_value=datetime.date.today()
     )
 with col2:
     end_date = st.date_input(
-    "End date",
-    datetime.date.today(),
-    min_value=datetime.date(1985, 1, 1),
-    max_value=datetime.date.today()
+        "End date",
+        datetime.date.today(),
+        min_value=datetime.date(1985, 1, 1),
+        max_value=datetime.date.today()
     )
 
 if start_date > end_date:
@@ -66,12 +69,18 @@ if st.button("Scrape"):
     if not urls or not keywords:
         st.warning("Please enter at least one URL and one keyword")
     else:
-        # Step 1: Scrape and store all results
         with st.spinner("Scraping websites... please wait"):
-            scrape_all_sites(urls, keywords)
-        st.success("Scraping completed and stored in database.")
+            successes, failures = scrape_all_sites(urls, keywords)
 
-        # Step 2: Fetch only results matching current filters
+        # Show scrape summary
+        if successes:
+            st.success(f"Scraping completed for {len(successes)} site(s).")
+        if failures:
+            st.warning(f"Failed to scrape {len(failures)} site(s):")
+            for site, err in failures:
+                st.text(f"{site} -> {err}")
+
+        # Fetch only whatever succeeded
         try:
             filtered_results = fetch_filtered_results(
                 start_date,
@@ -92,3 +101,4 @@ if st.button("Scrape"):
 
         except Exception as e:
             st.error(f"Could not fetch results from the database: {e}")
+            logging.error("Database fetch failed", exc_info=True)
