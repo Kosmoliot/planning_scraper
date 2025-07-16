@@ -2,3 +2,5 @@
 .venv
 .env
 
+# Folders
+__pycache__/

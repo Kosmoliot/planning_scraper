@@ -669,3 +669,46 @@ Stacktrace:
 2025-07-08 13:39:34,496 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
 2025-07-08 13:39:48,271 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
 2025-07-08 13:40:14,642 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-09 16:19:04,120 [INFO] ====== WebDriver manager ======
+2025-07-09 16:19:10,077 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-09 16:19:10,150 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-09 16:19:10,191 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-09 16:19:10,300 [INFO] WebDriver version 137.0.7151.119 selected
+2025-07-09 16:19:10,302 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-09 16:19:10,302 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/137.0.7151.119/mac-arm64/chromedriver-mac-arm64.zip
+2025-07-09 16:19:10,357 [INFO] Driver downloading response is 200
+2025-07-09 16:19:12,139 [INFO] Get LATEST chromedriver version for google-chrome
+2025-07-09 16:19:12,272 [INFO] Driver has been saved in cache [/Users/miguel/.wdm/drivers/chromedriver/mac64/137.0.7151.119]
+2025-07-09 16:19:14,333 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-09 16:19:30,830 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-09 16:19:36,850 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-09 16:20:47,693 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-15 16:34:09,403 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:34:26,535 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:34:37,415 [INFO] Scraping keyword 'water tank' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-15 16:35:06,472 [INFO] Scraping keyword 'anaerobic' from https://info.southnorfolkandbroadland.gov.uk/online-applications/
+2025-07-15 16:37:38,786 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:37:56,310 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:39:18,143 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:39:35,893 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:46:00,492 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:46:18,758 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:47:25,389 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:47:44,843 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:52:50,916 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:53:06,460 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:58:38,548 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 16:58:53,559 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 18:11:58,729 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 18:16:59,090 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-15 18:17:16,567 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-16 15:15:25,175 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-16 15:15:42,125 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-16 15:16:03,221 [INFO] Scraping keyword 'water tank' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-16 15:16:19,751 [INFO] Scraping keyword 'anaerobic' from https://planningon-line.rushcliffe.gov.uk/online-applications/
+2025-07-16 15:17:49,544 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-16 15:17:58,368 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/
+2025-07-16 16:11:33,071 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-16 16:14:15,494 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-16 16:16:14,234 [INFO] Scraping keyword 'water tank' from https://planning.norwich.gov.uk/online-applications/
+2025-07-16 16:16:20,504 [INFO] Scraping keyword 'anaerobic' from https://planning.norwich.gov.uk/online-applications/

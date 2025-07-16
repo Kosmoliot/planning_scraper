@@ -2,7 +2,7 @@ import time
 import re
 import random
 import pandas as pd
-import logging
+import logging, os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from store import store_results
 
 logging.basicConfig(
@@ -24,13 +25,20 @@ logging.basicConfig(
 
 def setup_driver():
     options = Options()
-    options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.binary_location = "/usr/bin/chromium"
+    options.add_argument("--headless")
 
-    driver = webdriver.Chrome(options=options)
+    if os.getenv("RAILWAY_ENVIRONMENT"):
+        # Running on Railway -> use headless Chromium in container
+        options.binary_location = "/usr/bin/chromium"
+        driver = webdriver.Chrome(options=options)
+    else:
+        # Running locally -> use installed Chrome
+        options.add_argument("--start-maximized")
+        driver = webdriver.Chrome(options=options)
+
     return driver
 
 def extract_results(driver, keyword, site):
@@ -42,6 +50,19 @@ def extract_results(driver, keyword, site):
                 summary = res.find_element(By.CLASS_NAME, "summaryLinkTextClamp").text.strip()
             except:
                 summary = res.find_element(By.TAG_NAME, "a").text.strip()
+                
+            # find the <a> inside the result
+            link_element = res.find_element(By.TAG_NAME, "a")
+
+            # get the href attribute
+            relative_link = link_element.get_attribute("href")
+
+            # prepend the site URL if it's relative
+            if relative_link.startswith("/"):
+                base = site.rstrip("/")
+                full_link = base + relative_link
+            else:
+                full_link = relative_link
 
             meta_info = res.find_element(By.CSS_SELECTOR, "p.metaInfo").text.strip()
             address = res.find_element(By.CSS_SELECTOR, "p.address").text.strip()
@@ -57,7 +78,8 @@ def extract_results(driver, keyword, site):
                 "Validated Date": validated.group(1).strip() if validated else "",
                 "Status": status.group(1).strip() if status else "",
                 "Address": address,
-                "Summary": summary
+                "Summary": summary,
+                "Link": full_link
             })
         except Exception:
             continue
