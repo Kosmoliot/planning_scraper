@@ -10,7 +10,15 @@ from db import fetch_filtered_results
 
 INPUT_FILE = "scrape_inputs.json"
 
-logging.basicConfig(level=logging.INFO)
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[  
+        logging.FileHandler("scraper.log"),  # Log to file
+        logging.StreamHandler()  # Log to console
+    ]
+)
 
 def load_inputs():
     if os.path.exists(INPUT_FILE):
@@ -66,21 +74,33 @@ if st.button("Scrape"):
 
     save_inputs(urls, keywords)
 
+    # Log the start of the scraping process
     if not urls or not keywords:
         st.warning("Please enter at least one URL and one keyword")
+        logging.warning("User provided no URLs or keywords.")
     else:
-        with st.spinner("Scraping websites... please wait"):
-            successes, failures = scrape_all_sites(urls, keywords)
+        logging.info(f"Starting scrape for {len(urls)} URLs and {len(keywords)} keywords.")
+        
+        # Start scraping and capture successes/failures
+        try:
+            with st.spinner("Scraping websites... please wait"):
+                successes, failures = scrape_all_sites(urls, keywords)
 
-        # Show scrape summary
-        if successes:
-            st.success(f"Scraping completed for {len(successes)} site(s).")
-        if failures:
-            st.warning(f"Failed to scrape {len(failures)} site(s):")
-            for site, err in failures:
-                st.text(f"{site} -> {err}")
+            # Show scrape summary in Streamlit
+            if successes:
+                st.success(f"Scraping completed for {len(successes)} site(s).")
+                logging.info(f"Scraping completed successfully for {len(successes)} site(s).")
+            if failures:
+                st.warning(f"Failed to scrape {len(failures)} site(s):")
+                for site, err in failures:
+                    st.text(f"{site} -> {err}")
+                    logging.error(f"Failed to scrape {site} -> {err}")
 
-        # Fetch only whatever succeeded
+        except Exception as e:
+            st.error("An error occurred during scraping. Please check the logs.")
+            logging.error("Scraping failed with an exception", exc_info=True)
+        
+        # Fetch filtered results from the database (if scraping was successful)
         try:
             filtered_results = fetch_filtered_results(
                 start_date,
@@ -92,12 +112,15 @@ if st.button("Scrape"):
             if filtered_results:
                 st.write(f"Found {len(filtered_results)} results between {start_date} and {end_date}")
                 st.dataframe(filtered_results)
-
+                
+                # Provide a download button for the filtered results
                 df = pd.DataFrame(filtered_results)
                 csv = df.to_csv(index=False).encode("utf-8")
                 st.download_button("Download CSV", csv, "planning_results.csv", "text/csv")
+                logging.info(f"Fetched and displayed {len(filtered_results)} filtered results.")
             else:
                 st.info("No results found for this date range, URLs, and keywords.")
+                logging.info("No filtered results found within the provided date range and keywords.")
 
         except Exception as e:
             st.error(f"Could not fetch results from the database: {e}")
