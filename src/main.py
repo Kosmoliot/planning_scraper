@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 import datetime
+import pandas as pd
 
 from scraper import scrape_all_sites
 from db import fetch_filtered_results
@@ -34,9 +35,19 @@ st.title("Multi-site Planning Scraper")
 st.subheader("Filter by Validated Date")
 col1, col2 = st.columns(2)
 with col1:
-    start_date = st.date_input("Start date", datetime.date.today() - datetime.timedelta(days=30))
+    start_date = st.date_input(
+    "Start date",
+    datetime.date.today() - datetime.timedelta(days=30),
+    min_value=datetime.date(1985, 1, 1),
+    max_value=datetime.date.today()
+    )
 with col2:
-    end_date = st.date_input("End date", datetime.date.today())
+    end_date = st.date_input(
+    "End date",
+    datetime.date.today(),
+    min_value=datetime.date(1985, 1, 1),
+    max_value=datetime.date.today()
+    )
 
 if start_date > end_date:
     st.error("Start date cannot be after end date")
@@ -46,7 +57,7 @@ urls_input = st.text_area("Planning portal URLs (one per line):", default_urls, 
 keywords_input = st.text_area("Search keywords (one per line):", default_keywords, height=100)
 
 # Main Scrape + Show button
-if st.button("Scrape & Show"):
+if st.button("Scrape"):
     urls = [url.strip() for url in urls_input.strip().splitlines() if url.strip()]
     keywords = [kw.strip() for kw in keywords_input.strip().splitlines() if kw.strip()]
 
@@ -61,16 +72,23 @@ if st.button("Scrape & Show"):
         st.success("Scraping completed and stored in database.")
 
         # Step 2: Fetch only results matching current filters
-        filtered_results = fetch_filtered_results(
-            start_date,
-            end_date,
-            urls,
-            keywords
-        )
+        try:
+            filtered_results = fetch_filtered_results(
+                start_date,
+                end_date,
+                urls,
+                keywords
+            )
 
-        # Step 3: Display filtered results
-        if filtered_results:
-            st.write(f"Found {len(filtered_results)} results between {start_date} and {end_date}")
-            st.dataframe(filtered_results)
-        else:
-            st.info("No results found for this date range, URLs, and keywords.")
+            if filtered_results:
+                st.write(f"Found {len(filtered_results)} results between {start_date} and {end_date}")
+                st.dataframe(filtered_results)
+
+                df = pd.DataFrame(filtered_results)
+                csv = df.to_csv(index=False).encode("utf-8")
+                st.download_button("Download CSV", csv, "planning_results.csv", "text/csv")
+            else:
+                st.info("No results found for this date range, URLs, and keywords.")
+
+        except Exception as e:
+            st.error(f"Could not fetch results from the database: {e}")

@@ -23,7 +23,7 @@ def fetch_filtered_results(start_date, end_date, websites, keywords):
     conn = get_connection()
     with conn.cursor() as cur:
         cur.execute("""
-            SELECT reference_no, validated_date, status, address, summary, website, search_word, scraped_at
+            SELECT reference_no, validated_date, status, address, summary, website, search_word, scraped_at, full_link
             FROM applications
             WHERE validated_date BETWEEN %s AND %s
               AND website = ANY(%s)

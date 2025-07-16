@@ -20,6 +20,7 @@ def store_results(results):
             app['Summary'],
             app['Website'],
             app['Search Word'],
+            app['Link'],
             now  # scraped_at value
         )
         for app in results
@@ -34,7 +35,9 @@ def store_results(results):
         summary,
         website,
         search_word,
+        full_link,
         scraped_at
+        
     )
     VALUES %s
     ON CONFLICT (reference_no) DO NOTHING;
