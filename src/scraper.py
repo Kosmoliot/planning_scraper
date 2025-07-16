@@ -1,61 +1,71 @@
-import logging
 import time
 import re
+import random
+import pandas as pd
+import logging, os
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException
 from store import store_results
+import streamlit as st
 
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[  
+        logging.FileHandler("scraper.log"),   # Logs to a file
+        logging.StreamHandler()  # Logs to console
+    ]
+)
+
+# Helper function for driver setup
 def setup_driver():
     options = Options()
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--headless")
 
-    # Detect Railway vs local
-    import os
     if os.getenv("RAILWAY_ENVIRONMENT"):
-        options.add_argument("--headless")
+        # Running on Railway -> use headless Chromium in container
         options.binary_location = "/usr/bin/chromium"
         driver = webdriver.Chrome(options=options)
+        logging.info("Using headless Chromium on Railway")
     else:
+        # Running locally -> use installed Chrome
         options.add_argument("--start-maximized")
         driver = webdriver.Chrome(options=options)
+        logging.info("Using local Chrome browser")
 
     return driver
 
+# Function to extract search results from a page
 def extract_results(driver, keyword, site):
     results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
     applications = []
-
+    logging.info(f"Extracting results for '{keyword}' on {site}")
+    
     for res in results:
         try:
-            try:
-                summary = res.find_element(By.CLASS_NAME, "summaryLinkTextClamp").text.strip()
-            except:
-                summary = res.find_element(By.TAG_NAME, "a").text.strip()
-
+            summary = res.find_element(By.CLASS_NAME, "summaryLinkTextClamp").text.strip() if res.find_elements(By.CLASS_NAME, "summaryLinkTextClamp") else res.find_element(By.TAG_NAME, "a").text.strip()
+            link_element = res.find_element(By.TAG_NAME, "a")
+            relative_link = link_element.get_attribute("href")
+            
+            # Construct the full link if it's relative
+            full_link = relative_link if not relative_link.startswith("/") else site.rstrip("/") + relative_link
+            
             meta_info = res.find_element(By.CSS_SELECTOR, "p.metaInfo").text.strip()
             address = res.find_element(By.CSS_SELECTOR, "p.address").text.strip()
 
             ref_no = re.search(r"Ref\. No:\s*(\S+)", meta_info)
             validated = re.search(r"Validated:\s*([^|]+)", meta_info)
             status = re.search(r"Status:\s*(.+)", meta_info)
-
-            # Extract the link safely
-            try:
-                link_element = res.find_element(By.CSS_SELECTOR, "a.summaryLink")
-            except NoSuchElementException:
-                link_element = res.find_element(By.TAG_NAME, "a")
-
-            relative_link = link_element.get_attribute("href")
-            if relative_link.startswith("/"):
-                base = site.rstrip("/")
-                full_link = base + relative_link
-            else:
-                full_link = relative_link
 
             applications.append({
                 "Website": site,
@@ -67,58 +77,92 @@ def extract_results(driver, keyword, site):
                 "Summary": summary,
                 "Link": full_link
             })
-
         except Exception as e:
-            logging.warning(f"Skipping one result due to error: {e}")
+            logging.error(f"Error extracting result: {e}")
             continue
-
     return applications
 
-def scrape_single_site(site, keywords):
-    driver = setup_driver()
-    all_results = []
+# Function to scrape a single site for a keyword
+def scrape_site(driver, site_url, keyword, wait, all_data):
+    logging.info(f"Scraping keyword '{keyword}' from {site_url}")
+    driver.get(site_url)
+    search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
+    search_input.clear()
+    search_input.send_keys(keyword)
+    search_input.send_keys(Keys.RETURN)
 
-    for keyword in keywords:
+    try:
+        select = Select(driver.find_element(By.ID, "resultsPerPage"))
+        select.select_by_value("100")
+        go_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"][value="Go"]')
+        go_button.click()
+        logging.info(f"Set results per page to 100 and clicked 'Go' button.")
+        time.sleep(2)
+    except NoSuchElementException:
+        logging.warning(f"Results per page selector or Go button not found for {site_url}")
+
+    max_wait = 60
+    elapsed = 0
+    while elapsed < max_wait:
         try:
-            logging.info(f"Searching {site} for keyword '{keyword}'")
-            driver.get(site)
-            time.sleep(2)
-
-            # Search form elements (adjust if needed)
-            search_input = driver.find_element(By.ID, "searchCriteria")
-            search_input.clear()
-            search_input.send_keys(keyword)
-            search_button = driver.find_element(By.ID, "searchButton")
-            search_button.click()
-
-            time.sleep(3)
-
-            results = extract_results(driver, keyword, site)
+            results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
             if results:
-                all_results.extend(results)
-                store_results(results)
-                logging.info(f"Stored {len(results)} results for '{keyword}' on {site}")
-            else:
-                logging.info(f"No results for '{keyword}' on {site}")
-
+                logging.info(f"Found {len(results)} results on page.")
+                break
+            time.sleep(1)
+            elapsed += 1
         except Exception as e:
-            logging.error(f"Keyword '{keyword}' failed on {site}: {e}", exc_info=True)
-            continue
+            logging.error(f"Error while waiting for results: {e}")
+            break
+    return driver
 
-    driver.quit()
-    return all_results
+# Function to scrape multiple pages for a keyword on a single site
+def scrape_pages(driver, keyword, site_url, wait, all_data):
+    page = 1
+    max_pages = 50
+    logging.info(f"Starting pagination for {keyword} on {site_url}")
 
+    while page <= max_pages:
+        try:
+            logging.info(f"Extracting data from page {page}")
+            page_data = extract_results(driver, keyword, site_url)
+            all_data.extend(page_data)
+            store_results(page_data)
+
+            next_buttons = driver.find_elements(By.CSS_SELECTOR, "a.next")
+            if not next_buttons:
+                logging.info(f"No more pages for {keyword} on {site_url}.")
+                break
+            driver.execute_script("arguments[0].click();", next_buttons[0])
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+            time.sleep(random.uniform(1, 2))
+            page += 1
+        except Exception as e:
+            logging.error(f"Error scraping pages for {keyword} on {site_url}: {e}")
+            break
+
+# Main function to scrape all sites
 def scrape_all_sites(urls, keywords):
+    driver = setup_driver()
+    wait = WebDriverWait(driver, 10)
+    all_data = []
+
     successes = []
     failures = []
 
-    for site in urls:
-        try:
-            scrape_single_site(site, keywords)
-            successes.append(site)
-        except Exception as e:
-            logging.error(f"Scraping failed for site {site}: {e}", exc_info=True)
-            failures.append((site, str(e)))
-            continue
+    for site_url in urls:
+        for keyword in keywords:
+            try:
+                logging.info(f"Starting to scrape {keyword} for {site_url}")
+                driver = scrape_site(driver, site_url, keyword, wait, all_data)
+                scrape_pages(driver, keyword, site_url, wait, all_data)
+                successes.append(site_url)
+            except Exception as e:
+                logging.error(f"Error scraping {site_url} for keyword '{keyword}': {e}")
+                failures.append((site_url, str(e)))
+                continue
 
+    driver.quit()
+
+    logging.info("Scraping process completed.")
     return successes, failures
