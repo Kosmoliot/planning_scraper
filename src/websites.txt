@@ -1,5 +1,0 @@
-"https://info.southnorfolkandbroadland.gov.uk/online-applications/",
-"https://planning.cornwall.gov.uk/online-applications/"
-"https://online.west-norfolk.gov.uk/",
-"https://planning.norwich.gov.uk/online-applications/",
-"https://planningon-line.rushcliffe.gov.uk/online-applications/"
