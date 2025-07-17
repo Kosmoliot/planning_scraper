@@ -84,11 +84,14 @@ if st.button("Scrape"):
 
             # Show scrape summary
             if successes:
-                st.success(f"Scraping completed for {len(successes)} site(s).")
+                st.success(f"Scraping completed for {len(successes)} site(s):")
+                for site in successes:
+                    st.text(f" {site}")
+
             if failures:
-                st.warning(f"Failed to scrape {len(failures)} site(s):")
-                for site, err in failures:
-                    st.text(f"{site} -> {err}")
+                st.warning(f"Failed to scrape {len(failures)} site/keyword combinations:")
+                for site_keyword, err in failures:
+                    st.text(f"{site_keyword} -> {err}")
 
             # Fetch only whatever succeeded
             filtered_results = fetch_filtered_results(start_date, end_date, urls, keywords)

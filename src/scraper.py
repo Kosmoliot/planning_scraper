@@ -82,87 +82,119 @@ def extract_results(driver, keyword, site):
             continue
     return applications
 
-# Function to scrape a single site for a keyword
-def scrape_site(driver, site_url, keyword, wait, all_data):
+def scrape_site(driver, site_url, keyword, wait):
     logging.info(f"Scraping keyword '{keyword}' from {site_url}")
     driver.get(site_url)
-    search_input = wait.until(EC.presence_of_element_located((By.ID, "simpleSearchString")))
+
+    # Step 1: Enter keyword in search box & submit
+    search_input = wait.until(
+        EC.presence_of_element_located((By.ID, "simpleSearchString"))
+    )
     search_input.clear()
     search_input.send_keys(keyword)
     search_input.send_keys(Keys.RETURN)
 
+    time.sleep(2)  # small wait for page refresh
+
+    # Step 2: Check for "No results found" before doing anything else
+    no_result_box = driver.find_elements(By.CSS_SELECTOR, "div.messagebox li")
+    for li in no_result_box:
+        msg = li.text.strip().lower()
+        if "no results found" in msg:
+            logging.info(f"No results found for '{keyword}' on {site_url}.")
+            return False  # explicitly signal "no results"
+
+    # Step 3: If results exist, try setting results per page = 100
     try:
         select = Select(driver.find_element(By.ID, "resultsPerPage"))
         select.select_by_value("100")
-        go_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"][value="Go"]')
+        go_button = driver.find_element(
+            By.CSS_SELECTOR, 'input[type="submit"][value="Go"]'
+        )
         go_button.click()
-        logging.info(f"Set results per page to 100 and clicked 'Go' button.")
-        time.sleep(2)
+        logging.info(f"Changed results per page to 100 for {site_url}")
+        time.sleep(2)  # allow page reload
     except NoSuchElementException:
-        logging.warning(f"Results per page selector or Go button not found for {site_url}")
+        logging.info(f"No 'results per page' dropdown found on {site_url} (skipping)")
 
-    max_wait = 60
-    elapsed = 0
-    while elapsed < max_wait:
-        try:
-            results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
-            if results:
-                logging.info(f"Found {len(results)} results on page.")
-                break
-            time.sleep(1)
-            elapsed += 1
-        except Exception as e:
-            logging.error(f"Error while waiting for results: {e}")
-            break
-    return driver
+    # Step 4: Return True meaning “results might exist, go paginate”
+    return True
 
-# Function to scrape multiple pages for a keyword on a single site
+
 def scrape_pages(driver, keyword, site_url, wait, all_data):
+    """Iterate through all pages if any results exist"""
     page = 1
     max_pages = 50
-    logging.info(f"Starting pagination for {keyword} on {site_url}")
+
+    logging.info(f"Starting pagination for '{keyword}' on {site_url}")
 
     while page <= max_pages:
         try:
             logging.info(f"Extracting data from page {page}")
             page_data = extract_results(driver, keyword, site_url)
+
+            if not page_data and page == 1:
+                logging.info(f"No search results detected on the first page for '{keyword}' at {site_url}.")
+                break
+
             all_data.extend(page_data)
             store_results(page_data)
 
             next_buttons = driver.find_elements(By.CSS_SELECTOR, "a.next")
             if not next_buttons:
-                logging.info(f"No more pages for {keyword} on {site_url}.")
+                logging.info(f"No more pages for '{keyword}' on {site_url}.")
                 break
+
+            # Click next page
             driver.execute_script("arguments[0].click();", next_buttons[0])
-            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult")))
+            wait.until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "ul#searchresults li.searchresult"))
+            )
             time.sleep(random.uniform(1, 2))
             page += 1
+
         except Exception as e:
-            logging.error(f"Error scraping pages for {keyword} on {site_url}: {e}")
+            logging.error(f"Error scraping page {page} for '{keyword}' on {site_url}: {e}")
             break
 
-# Main function to scrape all sites
+
 def scrape_all_sites(urls, keywords):
     driver = setup_driver()
     wait = WebDriverWait(driver, 10)
     all_data = []
-
-    successes = []
+    successes = set()
     failures = []
 
     for site_url in urls:
+        site_had_success = False
+
         for keyword in keywords:
             try:
-                logging.info(f"Starting to scrape {keyword} for {site_url}")
-                driver = scrape_site(driver, site_url, keyword, wait, all_data)
+                logging.info(f"Starting scrape for '{keyword}' on {site_url}")
+
+                # Run search and check if results exist
+                has_results = scrape_site(driver, site_url, keyword, wait)
+
+                # If no results, log + continue with next keyword/site
+                if not has_results:
+                    logging.info(f"Skipping pagination for '{keyword}' on {site_url} (no results).")
+                    continue
+
+                # Paginate & extract results
                 scrape_pages(driver, keyword, site_url, wait, all_data)
-                successes.append(site_url)
+                site_had_success = True  # mark that at least 1 keyword worked
+
+
             except Exception as e:
-                logging.error(f"Error scraping {site_url} for keyword '{keyword}': {e}")
-                failures.append((site_url, str(e)))
+                logging.error(f"Failed scraping '{keyword}' on {site_url}: {e}")
+                failures.append((f"{site_url} (keyword: {keyword})", str(e)))
                 continue
 
-    driver.quit()
+        # Only add site once if at least one keyword succeeded
+        if site_had_success:
+            successes.add(site_url)
 
+    driver.quit()
     logging.info("Scraping process completed.")
-    return successes, failures
+
+    return list(successes), failures
