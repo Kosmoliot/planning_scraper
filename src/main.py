@@ -84,9 +84,7 @@ if st.button("Scrape"):
 
             # Show scrape summary
             if successes:
-                st.success(f"Scraping completed for {len(successes)} site(s):")
-                for site in successes:
-                    st.text(f" {site}")
+                st.success(f"Scraping completed for {len(successes)} site(s).")
 
             if failures:
                 st.warning(f"Failed to scrape {len(failures)} site/keyword combinations:")
