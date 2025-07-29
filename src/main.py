@@ -7,6 +7,7 @@ import logging
 
 from scraper import scrape_all_sites
 from db import fetch_filtered_results
+from store import get_all_keywords, get_all_urls
 
 INPUT_FILE = "scrape_inputs.json"
 
@@ -63,14 +64,41 @@ with col2:
 if start_date > end_date:
     st.error("Start date cannot be after end date")
 
-# URLs & Keywords
-urls_input = st.text_area("Planning portal URLs (one per line):", default_urls, height=150)
-keywords_input = st.text_area("Search keywords (one per line):", default_keywords, height=100)
+# Initialize session state (no defaults)
+if "urls_input" not in st.session_state:
+    st.session_state.urls_input = ""
+
+if "keywords_input" not in st.session_state:
+    st.session_state.keywords_input = ""
+
+# --- URL Text Area + Load Button ---
+st.session_state.urls_input = st.text_area(
+    "Enter URLs (one per line):",
+    value=st.session_state.urls_input,
+    key="urls_text",
+    height=150
+)
+if st.button("Load archived URLs"):
+    st.session_state.urls_input = "\n".join(get_all_urls())
+    st.rerun()
+
+# --- Keyword Text Area + Load Button ---
+st.session_state.keywords_input = st.text_area(
+    "Enter keywords (one per line):",
+    value=st.session_state.keywords_input,
+    key="keywords_text",
+    height=100
+)
+if st.button("Load archived Keywords"):
+    st.session_state.keywords_input = "\n".join(get_all_keywords())
+    st.rerun()
+
+
 
 # Main Scrape + Show button
 if st.button("Scrape"):
-    urls = [url.strip() for url in urls_input.strip().splitlines() if url.strip()]
-    keywords = [kw.strip() for kw in keywords_input.strip().splitlines() if kw.strip()]
+    urls = [url.strip() for url in st.session_state.urls_input.strip().splitlines() if url.strip()]
+    keywords = [kw.strip() for kw in st.session_state.keywords_input.strip().splitlines() if kw.strip()]
 
     save_inputs(urls, keywords)
 

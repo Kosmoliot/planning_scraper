@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from store import store_results
+from store import store_results, store_keyword, store_url
 import streamlit as st
 
 # Setup logging
@@ -171,6 +171,9 @@ def scrape_all_sites(urls, keywords):
         for keyword in keywords:
             try:
                 logging.info(f"Starting scrape for '{keyword}' on {site_url}")
+
+                store_keyword(keyword)
+                store_url(site_url)
 
                 # Run search and check if results exist
                 has_results = scrape_site(driver, site_url, keyword, wait)

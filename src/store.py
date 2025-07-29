@@ -47,3 +47,41 @@ def store_results(results):
     conn.commit()
     cursor.close()
     conn.close()
+
+def store_keyword(keyword: str):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO searched_keywords (keyword)
+                SELECT %s
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM searched_keywords WHERE keyword = %s
+                )
+            """, (keyword, keyword))  # <- keyword used twice
+        conn.commit()
+
+def store_url(url: str):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO searched_urls (url)
+                SELECT %s
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM searched_urls WHERE url = %s
+                )
+            """, (url, url))  # <- url used twice
+        conn.commit()
+
+def get_all_keywords():
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT keyword FROM searched_keywords")
+            rows = cur.fetchall()
+    return [row["keyword"] for row in rows]
+
+def get_all_urls():
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT url FROM searched_urls")
+            rows = cur.fetchall()
+    return [row["url"] for row in rows]
