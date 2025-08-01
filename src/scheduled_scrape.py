@@ -3,6 +3,7 @@ from datetime import datetime
 from scraper import scrape_all_sites
 from store import get_all_urls, get_all_keywords
 
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
