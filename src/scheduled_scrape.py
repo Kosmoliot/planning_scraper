@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 from scraper import scrape_all_sites
 from store import get_all_urls, get_all_keywords
-# store_results is called inside scrape_pages from scraper.py, so we don't call it here again
 
 # Configure logging
 logging.basicConfig(
