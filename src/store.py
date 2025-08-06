@@ -49,6 +49,7 @@ def store_results(results):
     conn.close()
 
 def store_keyword(keyword: str):
+    keyword = keyword.lower()
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute("""
