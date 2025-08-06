@@ -1,5 +1,5 @@
 import streamlit as st
-from pages import weekly_overview, manual_scraper, database_explorer
+from tabs import weekly_overview, manual_scraper, database_explorer
 
 st.set_page_config(page_title="Planning Scraper", layout="wide")
 
