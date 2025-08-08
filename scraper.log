@@ -1388,3 +1388,12 @@ LINE 2:                 INSERT INTO searched_urls (url)
 2025-08-06 11:46:03,558 [INFO] No results found for 'test2' on https://planning.norwich.gov.uk/online-applications/.
 2025-08-06 11:46:03,558 [INFO] Skipping pagination for 'test2' on https://planning.norwich.gov.uk/online-applications/ (no results).
 2025-08-06 11:46:03,653 [INFO] Scraping process completed.
+2025-08-08 14:19:31,609 [INFO] Using local Chrome browser
+2025-08-08 14:19:32,054 [INFO] Starting scrape for 'slurry lagoon' on https://www12.staffordbc.gov.uk/online-applications/
+2025-08-08 14:19:33,352 [INFO] Scraping keyword 'slurry lagoon' from https://www12.staffordbc.gov.uk/online-applications/
+2025-08-08 14:19:44,296 [INFO] Changed results per page to 100 for https://www12.staffordbc.gov.uk/online-applications/
+2025-08-08 14:19:47,158 [INFO] Starting pagination for 'slurry lagoon' on https://www12.staffordbc.gov.uk/online-applications/
+2025-08-08 14:19:48,223 [INFO] Extracting data from page 1
+2025-08-08 14:19:48,665 [INFO] Extracting results for 'slurry lagoon' on https://www12.staffordbc.gov.uk/online-applications/
+2025-08-08 14:19:50,511 [INFO] No more pages for 'slurry lagoon' on https://www12.staffordbc.gov.uk/online-applications/.
+2025-08-08 14:19:51,009 [INFO] Scraping process completed.

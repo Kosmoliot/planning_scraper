@@ -1,22 +1,14 @@
 import streamlit as st
 import datetime
 import pandas as pd
-import logging
-
+from logger import get_logger
 from scraper import scrape_all_sites
 from db import fetch_filtered_results
 from store import get_all_keywords, get_all_urls
 
 def render():
     # Setup logging
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s",
-        handlers=[  
-            logging.FileHandler("scraper.log"),  # Log to file
-            logging.StreamHandler()  # Log to console
-        ]
-    )
+    logger = get_logger()
 
     st.set_page_config(page_title="Planning Scraper", layout="wide")
     st.header("🔍 Manual Scraper")
@@ -79,7 +71,7 @@ def render():
 
         if not urls or not keywords:
             st.warning("Please enter at least one URL and one keyword")
-            logging.warning("User provided no URLs or keywords.")
+            logger.warning("User provided no URLs or keywords.")
         else:
             try:
                 with st.spinner("Scraping websites... please wait"):
@@ -109,4 +101,4 @@ def render():
 
             except Exception as e:
                 st.error(f"An unexpected error occurred: {e}")
-                logging.error("Error during scraping or filtering", exc_info=True)
+                logger.error("Error during scraping or filtering", exc_info=True)

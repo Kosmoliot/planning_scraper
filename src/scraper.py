@@ -2,7 +2,9 @@ import time
 import re
 import random
 import pandas as pd
-import logging, os
+import os
+import streamlit as st
+from logger import get_logger
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -12,17 +14,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from store import store_results, store_keyword, store_url
-import streamlit as st
+
 
 # Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[  
-        logging.FileHandler("scraper.log"),   # Logs to a file
-        logging.StreamHandler()  # Logs to console
-    ]
-)
+logger = get_logger()
+
 
 # Helper function for driver setup
 def setup_driver():
@@ -36,12 +32,12 @@ def setup_driver():
         # Running on Railway -> use headless Chromium in container
         options.binary_location = "/usr/bin/chromium"
         driver = webdriver.Chrome(options=options)
-        logging.info("Using headless Chromium on Railway")
+        logger.info("Using headless Chromium on Railway")
     else:
         # Running locally -> use installed Chrome
         options.add_argument("--start-maximized")
         driver = webdriver.Chrome(options=options)
-        logging.info("Using local Chrome browser")
+        logger.info("Using local Chrome browser")
 
     return driver
 
@@ -49,7 +45,7 @@ def setup_driver():
 def extract_results(driver, keyword, site):
     results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
     applications = []
-    logging.info(f"Extracting results for '{keyword}' on {site}")
+    logger.info(f"Extracting results for '{keyword}' on {site}", extra={"keyword": keyword, "url": site})
     
     for res in results:
         try:
@@ -78,12 +74,12 @@ def extract_results(driver, keyword, site):
                 "Link": full_link
             })
         except Exception as e:
-            logging.error(f"Error extracting result: {e}")
+            logger.error(f"Error extracting result: {e}")
             continue
     return applications
 
 def scrape_site(driver, site_url, keyword, wait):
-    logging.info(f"Scraping keyword '{keyword}' from {site_url}")
+    logger.info(f"Scraping keyword '{keyword}' from {site_url}", extra={"keyword": keyword, "url": site_url})
     driver.get(site_url)
 
     # Step 1: Enter keyword in search box & submit
@@ -101,7 +97,7 @@ def scrape_site(driver, site_url, keyword, wait):
     for li in no_result_box:
         msg = li.text.strip().lower()
         if "no results found" in msg:
-            logging.info(f"No results found for '{keyword}' on {site_url}.")
+            logger.info(f"No results found for '{keyword}' on {site_url}.", extra={"keyword": keyword, "url": site_url})
             return False  # explicitly signal "no results"
 
     # Step 3: If results exist, try setting results per page = 100
@@ -112,10 +108,10 @@ def scrape_site(driver, site_url, keyword, wait):
             By.CSS_SELECTOR, 'input[type="submit"][value="Go"]'
         )
         go_button.click()
-        logging.info(f"Changed results per page to 100 for {site_url}")
+        logger.info(f"Changed results per page to 100 for {site_url}", extra={"url": site_url})
         time.sleep(2)  # allow page reload
     except NoSuchElementException:
-        logging.info(f"No 'results per page' dropdown found on {site_url} (skipping)")
+        logger.info(f"No 'results per page' dropdown found on {site_url} (skipping)", extra={"url": site_url})
 
     # Step 4: Return True meaning “results might exist, go paginate”
     return True
@@ -126,15 +122,15 @@ def scrape_pages(driver, keyword, site_url, wait, all_data):
     page = 1
     max_pages = 50
 
-    logging.info(f"Starting pagination for '{keyword}' on {site_url}")
+    logger.info(f"Starting pagination for '{keyword}' on {site_url}", extra={"keyword": keyword, "url": site_url})
 
     while page <= max_pages:
         try:
-            logging.info(f"Extracting data from page {page}")
+            logger.info(f"Extracting data from page {page}")
             page_data = extract_results(driver, keyword, site_url)
 
             if not page_data and page == 1:
-                logging.info(f"No search results detected on the first page for '{keyword}' at {site_url}.")
+                logger.info(f"No search results detected on the first page for '{keyword}' at {site_url}.", extra={"keyword": keyword, "url": site_url})
                 break
 
             all_data.extend(page_data)
@@ -142,7 +138,7 @@ def scrape_pages(driver, keyword, site_url, wait, all_data):
 
             next_buttons = driver.find_elements(By.CSS_SELECTOR, "a.next")
             if not next_buttons:
-                logging.info(f"No more pages for '{keyword}' on {site_url}.")
+                logger.info(f"No more pages for '{keyword}' on {site_url}.", extra={"keyword": keyword, "url": site_url})
                 break
 
             # Click next page
@@ -154,7 +150,7 @@ def scrape_pages(driver, keyword, site_url, wait, all_data):
             page += 1
 
         except Exception as e:
-            logging.error(f"Error scraping page {page} for '{keyword}' on {site_url}: {e}")
+            logger.error(f"Error scraping page {page} for '{keyword}' on {site_url}: {e}", extra={"keyword": keyword, "url": site_url})
             break
 
 
@@ -170,7 +166,7 @@ def scrape_all_sites(urls, keywords):
 
         for keyword in keywords:
             try:
-                logging.info(f"Starting scrape for '{keyword}' on {site_url}")
+                logger.info(f"Starting scrape for '{keyword}' on {site_url}", extra={"keyword": keyword, "url": site_url})
 
                 store_keyword(keyword)
                 store_url(site_url)
@@ -180,7 +176,7 @@ def scrape_all_sites(urls, keywords):
 
                 # If no results, log + continue with next keyword/site
                 if not has_results:
-                    logging.info(f"Skipping pagination for '{keyword}' on {site_url} (no results).")
+                    logger.info(f"Skipping pagination for '{keyword}' on {site_url} (no results).", extra={"keyword": keyword, "url": site_url})
                     continue
 
                 # Paginate & extract results
@@ -189,7 +185,7 @@ def scrape_all_sites(urls, keywords):
 
 
             except Exception as e:
-                logging.error(f"Failed scraping '{keyword}' on {site_url}: {e}")
+                logger.error(f"Failed scraping '{keyword}' on {site_url}: {e}", extra={"keyword": keyword, "url": site_url})
                 failures.append((f"{site_url} (keyword: {keyword})", str(e)))
                 continue
 
@@ -198,6 +194,6 @@ def scrape_all_sites(urls, keywords):
             successes.add(site_url)
 
     driver.quit()
-    logging.info("Scraping process completed.")
+    logger.info("Scraping process completed.")
 
     return list(successes), failures
