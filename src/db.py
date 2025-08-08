@@ -33,3 +33,4 @@ def fetch_filtered_results(start_date, end_date, websites, keywords):
         results = cur.fetchall()
     conn.close()
     return results
+
