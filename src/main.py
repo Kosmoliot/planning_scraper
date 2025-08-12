@@ -1,12 +1,12 @@
 import streamlit as st
-from tabs import weekly_overview, manual_scraper, database_explorer
+from tabs import monthly_overview, manual_scraper, database_explorer
 
 st.set_page_config(page_title="Planning Scraper", layout="wide")
 
-tab1, tab2, tab3 = st.tabs(["Weekly Overview", "Manual Scraper", "Database Explorer"])
+tab1, tab2, tab3 = st.tabs(["Monthly Overview", "Manual Scraper", "Database Explorer"])
 
 with tab1:
-    weekly_overview.render()
+    monthly_overview.render()
 
 with tab2:
     manual_scraper.render()
