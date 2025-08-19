@@ -43,6 +43,7 @@ def setup_driver():
 
 # Function to extract search results from a page
 def extract_results(driver, keyword, site):
+
     results = driver.find_elements(By.CSS_SELECTOR, "ul#searchresults li.searchresult")
     applications = []
     logger.info(f"Extracting results for '{keyword}' on {site}", extra={"keyword": keyword, "url": site})
@@ -88,7 +89,13 @@ def scrape_site(driver, site_url, keyword, wait):
     )
     search_input.clear()
     search_input.send_keys(keyword)
-    search_input.send_keys(Keys.RETURN)
+    time.sleep(1)
+
+    # Then explicitly click the submit button
+    submit_button = wait.until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type="submit"][value="Search"]'))
+    )
+    driver.execute_script("arguments[0].click();", submit_button)
 
     time.sleep(2)  # small wait for page refresh
 

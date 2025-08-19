@@ -1,17 +1,12 @@
 import os
 import psycopg2
+import pandas as pd
 from psycopg2.extras import RealDictCursor
 
 # Load .env locally (Railway injects DATABASE_URL automatically)
 if os.getenv("RAILWAY_ENVIRONMENT") is None:
     from dotenv import load_dotenv
     load_dotenv()
-
-def get_connection():
-    return psycopg2.connect(
-        os.getenv("DATABASE_URL"),
-        cursor_factory=RealDictCursor
-    )
 
 def get_connection():
     return psycopg2.connect(
@@ -94,6 +89,28 @@ def fetch_results_by_summary(start_date, end_date, websites, keywords):
 
         query += " ORDER BY validated_date DESC;"
         cur.execute(query, tuple(params))
+        results = cur.fetchall()
+
+    conn.close()
+    return results
+
+def fetch_failed_urls():
+    """
+    Debug version: Returns a pandas DataFrame with all distinct URLs
+    that failed today. Also prints sample output for debugging.
+    """
+    conn = get_connection()
+    with conn.cursor() as cur:
+        query = """
+            SELECT DISTINCT url
+            FROM scraper_logs
+            WHERE level = 'ERROR' 
+            AND URL IS NOT NULL
+            AND DATE(timestamp) = CURRENT_DATE
+        """
+
+        
+        cur.execute(query)
         results = cur.fetchall()
 
     conn.close()
