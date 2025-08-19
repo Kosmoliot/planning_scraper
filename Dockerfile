@@ -1,16 +1,23 @@
+# Base Python (Debian Bookworm slim)
 FROM python:3.11-slim
 
-# Avoid prompts from apt
-ENV DEBIAN_FRONTEND=noninteractive
+# Prevent interactive tzdata prompts and reduce image size
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# System deps for Chromium/Selenium + useful fonts/libs
+# System deps for Chromium/Selenium
+# Notes:
+# - Use Debian package names (no Ubuntu-only packages)
+# - chromium-driver provides /usr/lib/chromium/chromedriver
+# - libgtk-3-0 is needed for recent Chromium builds
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     chromium-driver \
-    wget \
+    ca-certificates \
     curl \
     unzip \
-    ca-certificates \
     fonts-liberation \
     libasound2 \
     libatk-bridge2.0-0 \
@@ -18,6 +25,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcups2 \
     libdbus-1-3 \
     libgdk-pixbuf2.0-0 \
+    libglib2.0-0 \
+    libgtk-3-0 \
     libnspr4 \
     libnss3 \
     libx11-xcb1 \
@@ -27,20 +36,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgbm1 \
     libu2f-udev \
     xdg-utils \
-    libayatana-appindicator3-1 \
  && rm -rf /var/lib/apt/lists/*
 
-# Headless Chromium environment
-ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROMEDRIVER=/usr/bin/chromedriver
-ENV PATH="$PATH:/usr/bin"
+# Helpful envs for Selenium + Chromium
+ENV CHROME_BIN=/usr/bin/chromium \
+    CHROMEDRIVER=/usr/lib/chromium/chromedriver \
+    PATH="$PATH:/usr/lib/chromium"
 
-# App setup
+# Workdir
 WORKDIR /app
+
+# Python deps first (better layer caching)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+
+# App source
 COPY src/ ./src
 
-# Streamlit on Railway-friendly port
+# Expose (Railway will still inject $PORT)
 EXPOSE 8080
-CMD ["streamlit", "run", "src/main.py", "--server.port=8080", "--server.address=0.0.0.0"]
+
+# Important: bind Streamlit to $PORT that Railway provides
+# Use a shell form so $PORT variable expands at runtime
+CMD sh -c 'streamlit run src/main.py --server.port=${PORT:-8080} --server.address=0.0.0.0'
