@@ -1,17 +1,14 @@
 FROM python:3.11-slim
 
-# Avoid prompts from apt
-ENV DEBIAN_FRONTEND=noninteractive
-
-# System deps for Chromium/Selenium + useful fonts/libs
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install system dependencies for Chromium and Selenium
+RUN apt-get update && apt-get install -y \
     chromium \
     chromium-driver \
     wget \
     curl \
     unzip \
-    ca-certificates \
     fonts-liberation \
+    libappindicator3-1 \
     libasound2 \
     libatk-bridge2.0-0 \
     libatk1.0-0 \
@@ -24,23 +21,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxcomposite1 \
     libxdamage1 \
     libxrandr2 \
-    libgbm1 \
-    libu2f-udev \
     xdg-utils \
-    libayatana-appindicator3-1 \
- && rm -rf /var/lib/apt/lists/*
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
-# Headless Chromium environment
+# Set environment variables for headless Chrome
 ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROMEDRIVER=/usr/bin/chromedriver
 ENV PATH="$PATH:/usr/bin"
 
-# App setup
+# Set working directory
 WORKDIR /app
+
+# Copy files
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src
 
-# Streamlit on Railway-friendly port
+# Expose Streamlit port
 EXPOSE 8080
+
+# Run the app
 CMD ["streamlit", "run", "src/main.py", "--server.port=8080", "--server.address=0.0.0.0"]
