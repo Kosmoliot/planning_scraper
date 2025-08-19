@@ -23,22 +23,32 @@ logger = get_logger()
 # Helper function for driver setup
 def setup_driver():
     options = Options()
-    options.add_argument("--disable-gpu")
+    # Headless + stability flags
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-features=VizDisplayCompositor")
+    options.add_argument("--disable-features=IsolateOrigins,site-per-process")
+    options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                         "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
-    if os.getenv("RAILWAY_ENVIRONMENT"):
-        # Running on Railway -> use headless Chromium in container
-        options.binary_location = "/usr/bin/chromium"
-        driver = webdriver.Chrome(options=options)
-        logger.info("Using headless Chromium on Railway")
+    # Decide Chrome binary and chromedriver path
+    running_on_railway = bool(os.getenv("RAILWAY_ENVIRONMENT"))
+    if running_on_railway:
+        options.binary_location = os.getenv("CHROME_BIN", "/usr/bin/chromium")
+        driver_path = os.getenv("CHROMEDRIVER", "/usr/lib/chromium/chromedriver")
+        service = Service(driver_path)
+        logger.info("Using headless Chromium on Railway",
+                    extra={"chrome_bin": options.binary_location, "chromedriver": driver_path})
     else:
-        # Running locally -> use installed Chrome
+        # Local: rely on system Chrome + chromedriver on PATH
+        service = Service()  # Selenium will try PATH
         options.add_argument("--start-maximized")
-        driver = webdriver.Chrome(options=options)
         logger.info("Using local Chrome browser")
 
+    driver = webdriver.Chrome(service=service, options=options)
     return driver
 
 # Function to extract search results from a page
