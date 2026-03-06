@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pydeck as pdk
 from db import fetch_results
-from geocoder import get_geocoding_stats, run_geocoding_batch, BATCH_SIZE
+from geocoder import get_geocoding_stats
 from utils import score_lead, SCORE_LABELS
 from tabs.components import date_range_inputs, status_multiselect, results_table
 
@@ -25,25 +25,19 @@ def render():
     col_c.metric("Remaining", f"{stats['pending']:,}")
 
     if stats["pending"] > 0:
-        with st.expander(f"Geocode {stats['pending']:,} remaining records"):
-            st.caption(f"Free OpenStreetMap API, 1 req/sec. Batch of {BATCH_SIZE} ≈ {BATCH_SIZE * 1.1 / 60:.0f} min.")
-            batch = st.number_input("Batch size", min_value=10, max_value=BATCH_SIZE, value=100, step=10)
-            if st.button("Start geocoding"):
-                bar = st.progress(0)
-                txt = st.empty()
-                ok, fail, remaining = run_geocoding_batch(
-                    batch_size=batch,
-                    progress_callback=lambda i, t: (bar.progress(i / t), txt.text(f"{i}/{t}"))
-                )
-                st.success(f"Done — {ok} geocoded, {fail} failed, {remaining:,} remaining.")
-                st.rerun()
+        est_hours = stats["pending"] * 1.1 / 3600
+        est_str = f"~{est_hours:.1f} hrs" if est_hours >= 1 else f"~{est_hours * 60:.0f} min"
+        st.info(
+            f"Geocoding worker is processing {stats['pending']:,} remaining records in the background ({est_str} at 1 req/sec). "
+            f"The map will populate automatically as records are geocoded."
+        )
 
     st.divider()
 
-    start_date, end_date = date_range_inputs("map", default_days=180)
+    start_date, end_date = date_range_inputs("map", default_days=365 * 5)
     col1, col2 = st.columns(2)
     with col1:
-        selected_statuses = status_multiselect("map_statuses", default=["Pending", "Approved"])
+        selected_statuses = status_multiselect("map_statuses")
     with col2:
         min_score = st.selectbox(
             "Minimum lead score", options=[1, 2, 3, 4, 5],
@@ -52,7 +46,7 @@ def render():
 
     rows = fetch_results(start_date, end_date, statuses=selected_statuses or None, geocoded_only=True)
     if not rows:
-        st.info("No geocoded applications found. Run a geocoding batch first.")
+        st.info("No geocoded applications match the current filters. Try widening the date range or including more statuses. If no records have been geocoded yet, run a batch above.")
         return
 
     df = pd.DataFrame(rows)
@@ -64,6 +58,9 @@ def render():
         return
 
     df["colour"] = df["score"].map(SCORE_COLOURS)
+    df["validated_date"] = df["validated_date"].astype(str)
+    df["latitude"] = df["latitude"].astype(float)
+    df["longitude"] = df["longitude"].astype(float)
     st.write(f"**{len(df):,} applications mapped**")
 
     st.pydeck_chart(pdk.Deck(
