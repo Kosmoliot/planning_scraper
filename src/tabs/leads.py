@@ -88,7 +88,9 @@ def render():
     with col2:
         min_score = st.selectbox(
             "Minimum lead score", options=[1, 2, 3, 4, 5],
-            index=0, format_func=lambda x: SCORE_LABELS[x], key="leads_minscore"
+            index=0, format_func=lambda x: SCORE_LABELS[x], key="leads_minscore",
+            help="Scores are based on keyword matching in the application summary. "
+                 "5 = Hot (core AD keywords), 1 = Low (no match). See Help for full details.",
         )
         legend_items = [(5, "Hot"), (4, "High"), (3, "Good"), (2, "Moderate"), (1, "Low")]
         dots = " &nbsp;·&nbsp; ".join(
