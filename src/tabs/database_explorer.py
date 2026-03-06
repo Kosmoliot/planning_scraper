@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from db import fetch_results_by_summary
+from db import fetch_results
 from store import get_all_urls
 import datetime
 
@@ -29,7 +29,7 @@ def render():
 
     #Search button
     if st.button("Search"):
-        results = fetch_results_by_summary(start_date, end_date, selected_urls, selected_keywords)
+        results = fetch_results(start_date, end_date, websites=selected_urls, summary_keywords=selected_keywords)
         if results:
             df = pd.DataFrame(results)
             st.dataframe(df, use_container_width=True)

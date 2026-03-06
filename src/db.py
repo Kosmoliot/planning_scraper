@@ -1,35 +1,47 @@
 import os
+import re
 import psycopg2
-import pandas as pd
+import psycopg2.pool
 from psycopg2.extras import RealDictCursor
+from contextlib import contextmanager
 
-# Load .env locally (Railway injects DATABASE_URL automatically)
 if os.getenv("RAILWAY_ENVIRONMENT") is None:
     from dotenv import load_dotenv
     load_dotenv()
 
-def get_connection():
-    return psycopg2.connect(
-        os.getenv("DATABASE_URL"),
-        cursor_factory=RealDictCursor
-    )
+_pool = None
 
-def fetch_filtered_results(start_date, end_date, websites, keywords, summary_search=None, match_all=False):
-    """
-    Filters:
-      - validated_date BETWEEN start_date AND end_date (always)
-      - website IN websites (if provided)
-      - search_word IN keywords (if provided)
-      - summary contains words from summary_search (if provided)
-        * match_all=False -> OR between words
-        * match_all=True  -> AND between words
-    """
-    conn = get_connection()
-    results = []
+def _get_pool():
+    global _pool
+    if _pool is None:
+        db_url = os.getenv("DATABASE_URL")
+        if not db_url:
+            raise RuntimeError("DATABASE_URL environment variable is not set")
+        _pool = psycopg2.pool.ThreadedConnectionPool(1, 10, db_url, cursor_factory=RealDictCursor)
+    return _pool
+
+@contextmanager
+def get_connection():
+    pool = _get_pool()
+    conn = pool.getconn()
     try:
+        yield conn
+    finally:
+        pool.putconn(conn)
+
+def fetch_results(start_date, end_date, websites=None, search_words=None, summary_keywords=None, match_all=False):
+    """
+    Fetch planning applications with optional filters:
+      - websites: filter by website column
+      - search_words: filter by search_word column (exact match)
+      - summary_keywords: list of terms to search within summary (ILIKE)
+      - match_all: True = AND between summary terms, False = OR
+    """
+    with get_connection() as conn:
         with conn.cursor() as cur:
             query = """
-                SELECT reference_no, validated_date, status, address, summary, website, search_word, scraped_at, full_link
+                SELECT reference_no, validated_date, status, address, summary,
+                       website, search_word, scraped_at, full_link
                 FROM applications
                 WHERE validated_date BETWEEN %s AND %s
             """
@@ -39,79 +51,28 @@ def fetch_filtered_results(start_date, end_date, websites, keywords, summary_sea
                 query += " AND website = ANY(%s)"
                 params.append(websites)
 
-            if keywords:
+            if search_words:
                 query += " AND search_word = ANY(%s)"
-                params.append(keywords)
+                params.append(search_words)
 
-            # --- NEW: summary search ---
-            terms = []
-            if summary_search:
-                # split on whitespace/commas; keep non-empty terms
-                import re
-                terms = [t for t in re.split(r"[,\s]+", summary_search.strip()) if t]
-
-            if terms:
-                # Build "(summary ILIKE %s [AND/OR] summary ILIKE %s ...)"
+            if summary_keywords:
                 op = " AND " if match_all else " OR "
-                like_clauses = op.join(["summary ILIKE %s"] * len(terms))
+                like_clauses = op.join(["summary ILIKE %s"] * len(summary_keywords))
                 query += f" AND ({like_clauses})"
-                params.extend([f"%{t}%" for t in terms])
+                params.extend([f"%{t}%" for t in summary_keywords])
 
             query += " ORDER BY validated_date DESC;"
             cur.execute(query, tuple(params))
-            results = cur.fetchall()
-    finally:
-        conn.close()
-
-    return results
-
-def fetch_results_by_summary(start_date, end_date, websites, keywords):
-    """
-    Fetch results from the database filtered by:
-    - validated_date BETWEEN start_date AND end_date
-    - website IN (websites list)
-    - summary contains ANY of the keywords
-    """
-    conn = get_connection()
-    with conn.cursor() as cur:
-        query = """
-            SELECT reference_no, validated_date, status, address, summary, website, search_word, scraped_at, full_link
-            FROM applications
-            WHERE validated_date BETWEEN %s AND %s
-              AND website = ANY(%s)
-        """
-        params = [start_date, end_date, websites]
-
-        if keywords:
-            keyword_clauses = " OR ".join(["summary ILIKE %s"] * len(keywords))
-            query += f" AND ({keyword_clauses})"
-            params.extend([f"%{kw}%" for kw in keywords])
-
-        query += " ORDER BY validated_date DESC;"
-        cur.execute(query, tuple(params))
-        results = cur.fetchall()
-
-    conn.close()
-    return results
+            return cur.fetchall()
 
 def fetch_failed_urls():
-    """
-    Debug version: Returns a pandas DataFrame with all distinct URLs
-    that failed today. Also prints sample output for debugging.
-    """
-    conn = get_connection()
-    with conn.cursor() as cur:
-        query = """
-            SELECT DISTINCT url
-            FROM scraper_logs
-            WHERE level = 'ERROR' 
-            AND URL IS NOT NULL
-            AND DATE(timestamp) = CURRENT_DATE
-        """
-
-        
-        cur.execute(query)
-        results = cur.fetchall()
-
-    conn.close()
-    return results
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT DISTINCT url
+                FROM scraper_logs
+                WHERE level = 'ERROR'
+                  AND url IS NOT NULL
+                  AND DATE(timestamp) = CURRENT_DATE
+            """)
+            return cur.fetchall()

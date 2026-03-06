@@ -5,7 +5,6 @@ from db import fetch_failed_urls
 def render():
     st.header("❌ Today's Failed URLs")
 
-    df = fetch_failed_urls()
     results = fetch_failed_urls()
 
     if results:
