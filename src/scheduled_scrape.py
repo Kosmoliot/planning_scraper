@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 from scraper import scrape_all_sites
 from store import get_all_urls, get_all_keywords
+from geocoder import run_geocoding_batch
 
 
 # Configure logging
@@ -33,6 +34,11 @@ def run_scheduled_scrape():
             logging.warning(f"Failed: {item} → {error}")
 
     logging.info("Scheduled scraping run finished at %s", datetime.utcnow())
+
+    # Geocode any new records added by this scrape
+    logging.info("Starting geocoding batch for new records...")
+    ok, fail, remaining = run_geocoding_batch()
+    logging.info(f"Geocoding complete. Succeeded: {ok}, Failed: {fail}, Remaining: {remaining}")
 
 if __name__ == "__main__":
     run_scheduled_scrape()
