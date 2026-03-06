@@ -29,22 +29,27 @@ def _geocode_address(address: str):
     return None, None
 
 
-def run_geocoding_batch(batch_size: int = BATCH_SIZE, progress_callback=None):
+def run_geocoding_batch(batch_size=BATCH_SIZE, progress_callback=None):
     """
-    Geocode up to batch_size unprocessed records.
+    Geocode unprocessed records.
+    batch_size: number of records to process, or None to process all pending.
     progress_callback(current, total) is called after each record if provided.
     Returns (succeeded, failed, remaining) counts.
     """
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute(
-                """
-                SELECT reference_no, address FROM applications
-                WHERE geocoded = FALSE AND address IS NOT NULL AND address != ''
-                LIMIT %s
-                """,
-                (batch_size,),
-            )
+            if batch_size is None:
+                cur.execute(
+                    "SELECT reference_no, address FROM applications "
+                    "WHERE geocoded = FALSE AND address IS NOT NULL AND address != ''"
+                )
+            else:
+                cur.execute(
+                    "SELECT reference_no, address FROM applications "
+                    "WHERE geocoded = FALSE AND address IS NOT NULL AND address != '' "
+                    "LIMIT %s",
+                    (batch_size,),
+                )
             rows = cur.fetchall()
 
     total = len(rows)
