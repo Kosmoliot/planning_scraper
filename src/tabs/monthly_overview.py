@@ -1,20 +1,16 @@
 import streamlit as st
 import pandas as pd
 from db import fetch_results
-from datetime import datetime, timedelta
+from tabs.components import date_range_inputs, status_multiselect, results_table
+
 
 def render():
     st.header("Monthly Overview")
-    today = datetime.today().date()
-    last_month = today - timedelta(days=30)
+    start_date, end_date = date_range_inputs("mo", default_days=30)
+    selected_statuses = status_multiselect("mo_statuses")
 
-    st.write(f"Showing planning applications from **{last_month}** to **{today}**")
-
-    results = fetch_results(start_date=last_month, end_date=today)
+    results = fetch_results(start_date, end_date, statuses=selected_statuses or None)
     if results:
-        df = pd.DataFrame(results)
-        st.dataframe(df)
-        csv = df.to_csv(index=False).encode("utf-8")
-        st.download_button("Download CSV", csv, "monthly_results.csv", "text/csv")
+        results_table(pd.DataFrame(results), "monthly_results.csv")
     else:
-        st.info("No planning applications found for the last 30 days.")
+        st.info("No planning applications found for this period.")

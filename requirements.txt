@@ -1,5 +1,5 @@
-streamlit
-selenium
-psycopg2-binary
-pandas
-python-dotenv
+streamlit==1.50.0
+selenium==4.36.0
+psycopg2-binary==2.9.11
+pandas==2.3.3
+python-dotenv==1.2.1

@@ -1,8 +1,6 @@
 import logging
 from db import get_connection
 
-_logger = None  # ← global cache
-
 class PostgresHandler(logging.Handler):
     def emit(self, record):
         try:
@@ -23,11 +21,11 @@ class PostgresHandler(logging.Handler):
 
 def get_logger():
     logger = logging.getLogger("scraper")
+    if logger.hasHandlers():
+        return logger  # already configured, avoid rebuilding handlers on every call
+
     logger.setLevel(logging.INFO)
     logger.propagate = False
-
-    if logger.hasHandlers():
-        logger.handlers.clear()
 
     formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
 

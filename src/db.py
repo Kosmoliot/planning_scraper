@@ -29,19 +29,22 @@ def get_connection():
     finally:
         pool.putconn(conn)
 
-def fetch_results(start_date, end_date, websites=None, search_words=None, summary_keywords=None, match_all=False):
+def fetch_results(start_date, end_date, websites=None, search_words=None,
+                  summary_keywords=None, statuses=None, geocoded_only=False, match_all=False):
     """
     Fetch planning applications with optional filters:
       - websites: filter by website column
       - search_words: filter by search_word column (exact match)
       - summary_keywords: list of terms to search within summary (ILIKE)
+      - statuses: list of normalised status values to include
+      - geocoded_only: only return rows with valid lat/lng
       - match_all: True = AND between summary terms, False = OR
     """
     with get_connection() as conn:
         with conn.cursor() as cur:
             query = """
                 SELECT reference_no, validated_date, status, address, summary,
-                       website, search_word, scraped_at, full_link
+                       website, search_word, scraped_at, full_link, latitude, longitude
                 FROM applications
                 WHERE validated_date BETWEEN %s AND %s
             """
@@ -54,6 +57,13 @@ def fetch_results(start_date, end_date, websites=None, search_words=None, summar
             if search_words:
                 query += " AND search_word = ANY(%s)"
                 params.append(search_words)
+
+            if statuses:
+                query += " AND status = ANY(%s)"
+                params.append(statuses)
+
+            if geocoded_only:
+                query += " AND geocoded = TRUE AND latitude IS NOT NULL"
 
             if summary_keywords:
                 op = " AND " if match_all else " OR "

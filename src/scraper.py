@@ -1,19 +1,18 @@
 import time
 import re
 import random
-import pandas as pd
 import os
-import streamlit as st
-from logger import get_logger
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
+from logger import get_logger
 from store import store_results, store_keyword, store_url
+
+MAX_RETRIES = 2
+RETRY_BACKOFF = 3  # seconds
 
 
 # Setup logging
@@ -172,29 +171,36 @@ def scrape_all_sites(urls, keywords):
         site_had_success = False
 
         for keyword in keywords:
-            try:
-                logger.info(f"Starting scrape for '{keyword}' on {site_url}", extra={"keyword": keyword, "url": site_url})
+            store_keyword(keyword)
+            store_url(site_url)
 
-                store_keyword(keyword)
-                store_url(site_url)
+            last_error = None
+            for attempt in range(1, MAX_RETRIES + 2):  # 1 attempt + MAX_RETRIES retries
+                try:
+                    logger.info(f"Starting scrape for '{keyword}' on {site_url} (attempt {attempt})", extra={"keyword": keyword, "url": site_url})
 
-                # Run search and check if results exist
-                has_results = scrape_site(driver, site_url, keyword, wait)
+                    has_results = scrape_site(driver, site_url, keyword, wait)
 
-                # If no results, log + continue with next keyword/site
-                if not has_results:
-                    logger.info(f"Skipping pagination for '{keyword}' on {site_url} (no results).", extra={"keyword": keyword, "url": site_url})
-                    continue
+                    if not has_results:
+                        logger.info(f"Skipping pagination for '{keyword}' on {site_url} (no results).", extra={"keyword": keyword, "url": site_url})
+                        break
 
-                # Paginate & extract results
-                scrape_pages(driver, keyword, site_url, wait, all_data)
-                site_had_success = True  # mark that at least 1 keyword worked
+                    scrape_pages(driver, keyword, site_url, wait, all_data)
+                    site_had_success = True
+                    last_error = None
+                    break  # success
 
+                except Exception as e:
+                    last_error = e
+                    if attempt <= MAX_RETRIES:
+                        wait_time = RETRY_BACKOFF * attempt
+                        logger.warning(f"Attempt {attempt} failed for '{keyword}' on {site_url}: {e}. Retrying in {wait_time}s...", extra={"keyword": keyword, "url": site_url})
+                        time.sleep(wait_time)
+                    else:
+                        logger.error(f"All attempts failed for '{keyword}' on {site_url}: {e}", extra={"keyword": keyword, "url": site_url})
 
-            except Exception as e:
-                logger.error(f"Failed scraping '{keyword}' on {site_url}: {e}", extra={"keyword": keyword, "url": site_url})
-                failures.append((f"{site_url} (keyword: {keyword})", str(e)))
-                continue
+            if last_error:
+                failures.append((f"{site_url} (keyword: {keyword})", str(last_error)))
 
         # Only add site once if at least one keyword succeeded
         if site_had_success:
