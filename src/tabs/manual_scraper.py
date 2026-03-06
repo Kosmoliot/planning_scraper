@@ -3,14 +3,13 @@ import datetime
 import pandas as pd
 from logger import get_logger
 from scraper import scrape_all_sites
-from db import fetch_filtered_results
+from db import fetch_results
 from store import get_all_keywords, get_all_urls
 
 def render():
     # Setup logging
     logger = get_logger()
 
-    st.set_page_config(page_title="Planning Scraper", layout="wide")
     st.header("🔍 Manual Scraper")
 
 
@@ -87,7 +86,7 @@ def render():
                         st.text(f"{site_keyword} -> {err}")
 
                 # Fetch only whatever succeeded
-                filtered_results = fetch_filtered_results(start_date, end_date, urls, keywords)
+                filtered_results = fetch_results(start_date, end_date, websites=urls, search_words=keywords)
 
                 if filtered_results:
                     st.write(f"Found {len(filtered_results)} results between {start_date} and {end_date}")

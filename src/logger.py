@@ -6,26 +6,20 @@ _logger = None  # ← global cache
 class PostgresHandler(logging.Handler):
     def emit(self, record):
         try:
-            conn = get_connection()
-            with conn.cursor() as cur:
-                cur.execute(
-                    """
-                    INSERT INTO scraper_logs (level, keyword, url, message)
-                    VALUES (%s, %s, %s, %s)
-                    """,
-                    (
-                        record.levelname,
-                        getattr(record, "keyword", None),
-                        getattr(record, "url", None),
-                        self.format(record),
+            with get_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "INSERT INTO scraper_logs (level, keyword, url, message) VALUES (%s, %s, %s, %s)",
+                        (
+                            record.levelname,
+                            getattr(record, "keyword", None),
+                            getattr(record, "url", None),
+                            self.format(record),
+                        )
                     )
-                )
                 conn.commit()
         except Exception as e:
             print(f"Failed to log to PostgreSQL: {e}")
-        finally:
-            if conn:
-                conn.close()
 
 def get_logger():
     logger = logging.getLogger("scraper")
