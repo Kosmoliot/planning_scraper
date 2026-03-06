@@ -1,5 +1,5 @@
 import streamlit as st
-from tabs import manual_scraper, failed_urls, manage_data, leads, map_view
+from tabs import manual_scraper, failed_urls, manage_data, leads, map_view, help as help_tab
 
 st.set_page_config(
     page_title="Planning Applications",
@@ -37,39 +37,35 @@ section[data-testid="stSidebar"] .stRadio span {
     font-size: 0.875rem !important;
 }
 
-/* Nav radio — hide label and dots */
-section[data-testid="stSidebar"] .stRadio > label { display: none; }
-section[data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child { display: none; }
-section[data-testid="stSidebar"] .stRadio div[role="radiogroup"] {
-    gap: 0;
-    display: flex;
-    flex-direction: column;
+/* ── Nav buttons ── */
+section[data-testid="stSidebar"] .stButton {
+    margin: 0 !important;
+    padding: 0 !important;
 }
-section[data-testid="stSidebar"] .stRadio label[data-baseweb="radio"] {
-    display: flex !important;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 0;
-    cursor: pointer;
-    border-left: 2px solid transparent;
-    transition: all 0.15s ease;
+section[data-testid="stSidebar"] .stButton > button {
+    background: transparent !important;
+    border: none !important;
+    border-left: 2px solid transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     color: #5A7A8A !important;
+    font-family: 'Inter', sans-serif !important;
     font-size: 0.85rem !important;
-    letter-spacing: 0.02em;
+    font-weight: 400 !important;
+    letter-spacing: 0.02em !important;
+    padding: 10px 20px !important;
+    text-align: left !important;
+    width: 100% !important;
+    transition: all 0.15s ease !important;
 }
-section[data-testid="stSidebar"] .stRadio label[data-baseweb="radio"]:hover {
-    background: rgba(58, 159, 197, 0.07);
-    border-left-color: #3A9FC5;
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background: rgba(58, 159, 197, 0.07) !important;
+    border-left-color: #3A9FC5 !important;
     color: #A0C0D0 !important;
 }
-section[data-testid="stSidebar"] .stRadio label[aria-checked="true"] {
-    background: rgba(58, 159, 197, 0.10) !important;
-    border-left: 2px solid #3A9FC5 !important;
-}
-section[data-testid="stSidebar"] .stRadio label[aria-checked="true"] p,
-section[data-testid="stSidebar"] .stRadio label[aria-checked="true"] span {
-    color: #3A9FC5 !important;
-    font-weight: 500 !important;
+section[data-testid="stSidebar"] .stButton > button:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* ── Main content ── */
@@ -216,6 +212,27 @@ summary { color: #6A8A9A !important; font-size: 0.875rem; font-weight: 500; }
 /* ── Spinner ── */
 .stSpinner > div { border-top-color: #3A9FC5 !important; }
 
+section[data-testid="stSidebar"] .stButton > button {
+    all: unset;
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: #5A7A8A !important;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background: rgba(58, 159, 197, 0.07) !important;
+    border-left-color: #3A9FC5 !important;
+    color: #A0C0D0 !important;
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: #0C1219; }
@@ -236,11 +253,51 @@ with st.sidebar:
         <div style='height: 1px; background: #1A2A38; margin: 0 0 0.5rem;'></div>
     """, unsafe_allow_html=True)
 
-    page = st.radio(
-        "nav",
-        ["Leads", "Map", "Manual Search", "Failed URLs", "Manage Data"],
-        label_visibility="collapsed",
-    )
+    if st.session_state.get("active_page") not in ["Leads", "Map", "Manual Search", "Failed URLs", "Manage Data", "Help"]:
+        st.session_state["active_page"] = "Leads"
+
+    active = st.session_state.get("active_page", "Leads")
+
+    # Highlight active nav button via injected CSS
+    st.markdown(f"""
+    <style>
+    [data-testid="stSidebar"] [data-testid="stBaseButton-secondary"][kind="secondary"]:not(:hover) {{
+        color: #5A7A8A !important;
+    }}
+    [data-testid="stSidebar"] button[key="nav_{active}"],
+    [data-testid="stSidebar"] div:has(> button[key="nav_{active}"]) > button {{
+        background: rgba(58,159,197,0.10) !important;
+        border-left: 2px solid #3A9FC5 !important;
+        color: #3A9FC5 !important;
+        font-weight: 500 !important;
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+
+    nav_items = ["Leads", "Map", "Manual Search", "Failed URLs", "Manage Data"]
+    for item in nav_items:
+        if st.button(item, key=f"nav_{item}", use_container_width=True):
+            st.session_state["active_page"] = item
+            st.rerun()
+
+    st.markdown("""
+        <a href="?nav=Help" target="_self" style="
+            position:fixed;bottom:0;left:0;width:220px;
+            padding:10px 20px;
+            background:#0A1018;
+            border-top:1px solid #1A2A38;
+            color:#5A7A8A;
+            font-family:Inter,sans-serif;
+            font-size:0.85rem;
+            text-decoration:none;
+            display:block;
+            z-index:9999;
+            transition:all 0.15s ease;
+        " onmouseover="this.style.background='rgba(58,159,197,0.07)';this.style.borderLeftColor='#3A9FC5';this.style.color='#A0C0D0';"
+           onmouseout="this.style.background='#0A1018';this.style.borderLeftColor='transparent';this.style.color='#5A7A8A';">
+            Help
+        </a>
+    """, unsafe_allow_html=True)
 
 
 # ── Page routing ─────────────────────────────────────────────────────────────
@@ -250,6 +307,14 @@ pages = {
     "Manual Search": manual_scraper.render,
     "Failed URLs":   failed_urls.render,
     "Manage Data":   manage_data.render,
+    "Help":          help_tab.render,
 }
 
-pages[page]()
+if st.query_params.get("nav") == "Help":
+    st.session_state["active_page"] = "Help"
+    st.query_params.clear()
+    st.rerun()
+
+active = st.session_state.get("active_page", "Leads")
+if active in pages:
+    pages[active]()

@@ -42,7 +42,9 @@ def render():
     with col2:
         min_score = st.selectbox(
             "Minimum lead score", options=[1, 2, 3, 4, 5],
-            index=0, format_func=lambda x: SCORE_LABELS[x], key="map_minscore"
+            index=0, format_func=lambda x: SCORE_LABELS[x], key="map_minscore",
+            help="Scores are based on keyword matching in the application summary. "
+                 "5 = Hot (core AD keywords), 1 = Low (no match). See Help for full details.",
         )
 
     rows = fetch_results(start_date, end_date, statuses=selected_statuses or None, geocoded_only=True)
