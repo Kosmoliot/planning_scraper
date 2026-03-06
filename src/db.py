@@ -76,13 +76,19 @@ def fetch_results(start_date, end_date, websites=None, search_words=None,
             return cur.fetchall()
 
 def fetch_failed_urls():
+    """Return failed URLs from the most recent scrape session (by date)."""
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                SELECT DISTINCT url
-                FROM scraper_logs
+                WITH last_run AS (
+                    SELECT DATE(MAX(timestamp)) AS run_date
+                    FROM scraper_logs
+                )
+                SELECT DISTINCT url, message, timestamp
+                FROM scraper_logs, last_run
                 WHERE level = 'ERROR'
                   AND url IS NOT NULL
-                  AND DATE(timestamp) = CURRENT_DATE
+                  AND DATE(timestamp) = last_run.run_date
+                ORDER BY timestamp DESC
             """)
             return cur.fetchall()

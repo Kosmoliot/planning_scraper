@@ -252,7 +252,15 @@ def score_lead(summary: str, address: str = "") -> int:
     return 2
 
 
-SCORE_LABELS = {1: "⬜ Low", 2: "🟦 Moderate", 3: "🟨 Good", 4: "🟧 High", 5: "🟥 Hot"}
+SCORE_LABELS = {1: "Low", 2: "Moderate", 3: "Good", 4: "High", 5: "Hot"}
+
+SCORE_HEX = {
+    5: "#C0392B",   # muted red
+    4: "#C87941",   # muted orange
+    3: "#B5A030",   # muted yellow
+    2: "#3A6EA8",   # muted blue
+    1: "#5A6472",   # muted grey
+}
 
 
 def normalise_status(raw):

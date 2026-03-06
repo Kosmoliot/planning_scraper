@@ -3,16 +3,17 @@ import pandas as pd
 import pydeck as pdk
 from db import fetch_results
 from geocoder import get_geocoding_stats
-from utils import score_lead, SCORE_LABELS
+from utils import score_lead, SCORE_LABELS, SCORE_HEX
 from tabs.components import date_range_inputs, status_multiselect, results_table
 
 SCORE_COLOURS = {
-    5: [220,  38,  38, 200],
-    4: [234, 127,  36, 200],
-    3: [234, 197,  36, 200],
-    2: [ 59, 130, 246, 200],
-    1: [156, 163, 175, 180],
+    5: [192,  57,  43, 210],   # muted red    — Hot
+    4: [200, 121,  65, 200],   # muted orange — High
+    3: [181, 160,  48, 195],   # muted yellow — Good
+    2: [ 58, 110, 168, 185],   # muted blue   — Moderate
+    1: [ 90, 100, 114, 170],   # muted grey   — Low
 }
+
 
 
 def render():
@@ -69,7 +70,9 @@ def render():
             data=df,
             get_position=["longitude", "latitude"],
             get_fill_color="colour",
-            get_radius=800,
+            get_radius=6000,
+            radius_min_pixels=5,
+            radius_max_pixels=22,
             pickable=True,
             auto_highlight=True,
         )],
@@ -77,6 +80,8 @@ def render():
             latitude=df["latitude"].mean(),
             longitude=df["longitude"].mean(),
             zoom=6,
+            min_zoom=3,
+            max_zoom=15,
         ),
         tooltip={
             "html": "<b>{status}</b> — {score} stars<br/>{address}<br/><small>{summary}</small>",
@@ -84,7 +89,17 @@ def render():
         },
     ))
 
-    st.caption("🔴 Hot (5) · 🟠 High (4) · 🟡 Good (3) · 🔵 Moderate (2) · ⚫ Low (1)")
+    legend_items = [
+        (5, "Hot"), (4, "High"), (3, "Good"), (2, "Moderate"), (1, "Low")
+    ]
+    dots = " &nbsp;·&nbsp; ".join(
+        f'<span style="display:inline-block;width:10px;height:10px;border-radius:50%;'
+        f'background:{SCORE_HEX[s]};margin-right:5px;vertical-align:middle;'
+        f'box-shadow:0 0 4px {SCORE_HEX[s]}88;"></span>'
+        f'<span style="color:#8AABB8;font-size:0.78rem;">{label} ({s})</span>'
+        for s, label in legend_items
+    )
+    st.markdown(f'<div style="margin-top:0.5rem">{dots}</div>', unsafe_allow_html=True)
 
     with st.expander("Show data table"):
         cols = ["status", "score", "validated_date", "address", "summary", "reference_no", "full_link"]

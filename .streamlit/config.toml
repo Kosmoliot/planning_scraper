@@ -1,0 +1,6 @@
+[theme]
+primaryColor             = "#3A9FC5"   # steel blue
+backgroundColor          = "#0C1219"   # deep navy-black
+secondaryBackgroundColor = "#141E2A"   # gunmetal panel
+textColor                = "#C5D5DF"   # cool light grey
+font                     = "sans serif"
